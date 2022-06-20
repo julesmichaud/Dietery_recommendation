@@ -1,7 +1,7 @@
 '''
 Created on Jun 20, 2022
 
-@author: valerio
+@author: valerio et jules
 '''
 
 class MyClass(object):
