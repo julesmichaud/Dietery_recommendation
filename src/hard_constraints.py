@@ -1,4 +1,4 @@
-from Dietery_recommendation.src.Constraints import Constraints
+from constraints import Constraints
 
 
 class HardConstraints(Constraints) :
