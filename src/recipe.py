@@ -28,3 +28,13 @@ class Recipe:
     
     def get_time(self):
         return self.time
+    
+    def portion_calories(self):
+        cal=0
+        for [ingredient, quantity] in self.ingredients:
+            cal+= (quantity/100)*ingredient.calories_per_hundred_grams
+        return cal
+
+    def portion_carbon_emission(self):        
+            
+            

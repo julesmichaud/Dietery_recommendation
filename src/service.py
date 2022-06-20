@@ -22,3 +22,6 @@ class Service(Recipe):
     def set_quantity(self, quantity):
         self.quantity = quantity
         
+    def adjusted_calories(self):
+        return self.quantity * super.portion_calories(self)
+        
