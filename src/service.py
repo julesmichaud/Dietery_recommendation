@@ -24,4 +24,6 @@ class Service(Recipe):
         
     def adjusted_calories(self):
         return self.quantity * super.portion_calories(self)
-        
+    
+    def adjusted_carbon(self):
+        return self.quantity * super.portion_carbon_emission(self)
