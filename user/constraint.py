@@ -1,3 +1,8 @@
+'''
+Created on 21 juin 2022
+
+@author: Jules Michaud
+'''
 class Constraint() :
 
     def __init__(self, importance, description):

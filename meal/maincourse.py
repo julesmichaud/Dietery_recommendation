@@ -3,8 +3,9 @@ Created on Jun 20, 2022
 
 @author: valerio
 '''
+from meal.service import Service
 
-class Maincourse(object):
+class Maincourse(Service):
     '''
     classdocs
     '''

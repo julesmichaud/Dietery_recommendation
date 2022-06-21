@@ -4,7 +4,7 @@ Created on Jun 20, 2022
 @author: valerio
 '''
 
-from src.recipe import Recipe
+from food.recipe import Recipe
 
 class Service(Recipe):
     '''

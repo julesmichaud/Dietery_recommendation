@@ -1,9 +1,9 @@
 '''
-Created on Jun 20, 2022
+Created on 20 Juin, 2022
 
-@author: Aurélien
+@author: Aurélien Giroux
 '''
-#from src import Ingredient
+
 from math import log2
 from math import ceil
 import kolmogorov.Coefficients.Coefficients as coefs

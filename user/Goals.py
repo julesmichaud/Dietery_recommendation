@@ -1,7 +1,12 @@
-from constraint import Constraint
+'''
+Created on 21 juin 2022
+
+@author: Jules Michaud
+'''
+from user import constraint
 
 
-class Goals(Constraint) :
+class Goals(constraint) :
 
     def __init__(self, departure, running, arrival):
         '''

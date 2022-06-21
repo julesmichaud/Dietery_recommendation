@@ -4,7 +4,7 @@ Created on Jun 20, 2022
 @author: valerio
 '''
 
-from src.service import Service
+from meal.service import Service
 
 class Starter(Service):
     '''
