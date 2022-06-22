@@ -26,14 +26,17 @@ def is_exit(user_in):
 
 def meal_arg_input():
     number_str = raw_input("Please indicate how many menus you would like to generate\n")
-    try:
-        number_int = int(number_str)
-    except:
-        print("Please type a number")
-        number_int = meal_arg_input()
-    return number_int
+    if(str.lower(number_str).__eq__("back")):
+        return -42
+    else:
+        try:
+            number_int = int(number_str)
+        except:
+            print("Please type a number")
+            number_int = meal_arg_input()
+        return number_int
 
-def wrong_input():
+def wrong_or_back_input():
     user_in = raw_input("Type '1' to change your parameters and '2' to generate a meal. At any moment, type 'back' to go back and 'exit' to exit\n")
     if(is_back(user_in) or is_exit(user_in)):
         print("See you soon !")
@@ -43,11 +46,14 @@ def wrong_input():
         #Find a way to execute the general_menu file...
     elif(user_in.__eq__("2")):
         number_of_menus = meal_arg_input()
-        print("Temporary meal generator placeholder, with" + str(number_of_menus) + "menus")
+        if(number_of_menus==-42):
+            wrong_or_back_input()
+        else:
+            print("Temporary meal generator placeholder, with " + str(number_of_menus) + " menu(s)")
         #Find a way to execute the execute meal_generator, or create a generator and generate a menu here
     else:
         print("Unrecognized input, please try again")
-        wrong_input()
+        wrong_or_back_input();
 
 if __name__ == '__main__':
     number_of_menus = 0
@@ -62,8 +68,11 @@ if __name__ == '__main__':
         #Find a way to execute the general_menu file...
     elif(user_in.__eq__("2")):
         number_of_menus = meal_arg_input()
-        print("Temporary meal generator placeholder, with " + str(number_of_menus) + " menu(s)")
+        if(number_of_menus==-42):
+            wrong_or_back_input()
+        else:
+            print("Temporary meal generator placeholder, with " + str(number_of_menus) + " menu(s)")
         #Find a way to execute the execute meal_generator, or create a generator and generate a menu here
     else:
         print("Unrecognized input, please try again")
-        wrong_input();
+        wrong_or_back_input();
