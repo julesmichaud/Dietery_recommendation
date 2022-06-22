@@ -34,6 +34,9 @@ def meal_arg_input():
         except:
             print("Please type a number")
             number_int = meal_arg_input()
+        if(number_int<=0):
+            print("Please enter a strictly positive number")
+            number_int = meal_arg_input()
         return number_int
 
 def wrong_or_back_input():
