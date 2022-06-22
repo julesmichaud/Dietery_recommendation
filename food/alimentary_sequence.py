@@ -1,7 +1,7 @@
 '''
 Created on Jun 20, 2022
 
-@author: valerio
+@authors: Valerio, Aurélien
 '''
 
 from datetime import *
@@ -53,8 +53,3 @@ class Alimentary_sequence:
             if enddate<maxdate:
                 maxdate=enddate
         return [mindate,maxdate]
-        
-    
-    
-            
-            
