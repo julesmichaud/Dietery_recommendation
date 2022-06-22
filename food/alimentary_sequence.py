@@ -6,11 +6,10 @@ Created on Jun 20, 2022
 
 from datetime import *
 
-class Recipe:
+class Alimentary_sequence:
     '''
     classdocs
     '''
-
 
     def __init__(self, ingredients, time):
         '''

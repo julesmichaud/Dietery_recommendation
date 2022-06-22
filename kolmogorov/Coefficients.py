@@ -9,13 +9,12 @@ class Coefficients(object):
     classdocs
     '''
 
-
     def __init__(self):
         '''
         Constructor
         '''
         self.normalization_kolmogorov_ingredient = 1
-        self.normalization_kolmogorov_recipe = 1
+        self.normalization_kolmogorov_alimentary_sequence = 1
         self.keyword_influence_coefficients_pairs = {}
         #etc... incomplete list, which values have to be updated according to our needs
         

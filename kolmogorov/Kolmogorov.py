@@ -12,7 +12,7 @@ class Kolmogorov(object):
     '''
     classdocs
     '''
-
+    
     def __init__(self):
         '''
         Constructor

@@ -4,13 +4,12 @@ Created on Jun 20, 2022
 @author: valerio
 '''
 
-from food.recipe import Recipe
+from food.alimentary_sequence import Alimentary_sequence
 
-class Service(Recipe):
+class Service(Alimentary_sequence):
     '''
     classdocs
     '''
-
 
     def __init__(self, ingredients, time, portion_size):
         '''
