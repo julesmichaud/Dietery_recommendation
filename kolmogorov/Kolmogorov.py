@@ -28,7 +28,7 @@ class Kolmogorov(object):
         complexity = 0
         for ingredient in recipe.get_ingredients():
             complexity += self.kolmogorov_aliment(ingredient)
-        return complexity/coefs.normalization_kolmogorov_recipe
+        return complexity/coefs.normalization_kolmogorov_alimentary_sequence
     
     def maj_weights(self, environnement, history, keyword_weights_pairs): #TODO
         return 1
