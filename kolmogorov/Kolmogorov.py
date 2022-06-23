@@ -1,7 +1,7 @@
 '''
 Created on 20 Juin, 2022
 
-@author: Aurélien Giroux
+@author: Aurelien Giroux
 '''
 
 from math import log2
@@ -20,7 +20,7 @@ class Kolmogorov(object):
     
     def kolmogorov_ingredient(self, ingredient):
         nbr_of_days = (ingredient.local_availability_period[1]-ingredient.local_availability_period[0]).days
-        return ceil((log2(nbr_of_days/365) - log2(1/365))/coefs.normalization_kolmogorov_ingredient)
+        return ceil(log2(365/nbr_of_days)/coefs.normalization_kolmogorov_ingredient) #ici on peut mettre ce coef à 1 et pondérer les autres relativement
         #Si un ingrédient n'existe qu'un jour par an, il est très inattendu, sa complexité souhaitée est donc log2(1/365) - log2(1/365) = 0
         #Si un ingrédient existe au contraire toute l'année, on veut qu'il ait une grande complexité soit log2(365/365) - log2(1/365) = log2(365) = 8,5 environ
     

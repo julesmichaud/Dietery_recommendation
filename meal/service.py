@@ -1,7 +1,7 @@
 '''
 Created on Jun 20, 2022
 
-@author: valerio
+@author: Valerio Guerrini
 '''
 
 from food.alimentary_sequence import Alimentary_sequence

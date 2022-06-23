@@ -1,7 +1,7 @@
 '''
 Created on 21 juin 2022
 
-@author: dardare
+@author: Clement Dardare
 '''
 
 class environment(object):

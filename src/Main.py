@@ -38,6 +38,9 @@ def meal_arg_input():
             print("Please enter a strictly positive number")
             number_int = meal_arg_input()
         return number_int
+    
+def get_number_of_menus():
+    return number_of_menus
 
 def wrong_or_back_input():
     user_in = raw_input("Type '1' to change your parameters and '2' to generate a meal. At any moment, type 'back' to go back and 'exit' to exit\n")

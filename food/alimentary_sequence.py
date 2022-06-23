@@ -1,7 +1,7 @@
 '''
 Created on Jun 20, 2022
 
-@authors: Valerio, Aurélien
+@authors: Valerio Guerrini, Aurelien Giroux
 '''
 
 from datetime import *
