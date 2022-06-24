@@ -33,3 +33,13 @@ class History() :
     def add_rateed_meal(self, meal, appreciation):
         self.add_meal(meal)
         self.add_appreciation(appreciation)
+        
+    def search_ingredient(self, ingredient):
+        count = 0
+        for i in range 14:
+            for elem in meals[-i]:
+                if elem == ingredient:
+                    count+=1
+        return count            
+                
+            
