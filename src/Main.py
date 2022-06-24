@@ -50,14 +50,12 @@ def back_input_after_2():
         quit()
     elif(user_in.__eq__("1")):
         print("Temporary menu placeholder")
-        meal_generator.MealGenerator()
         quit()
         #Find a way to execute the general_menu file...
     elif(user_in.__eq__("2")):
         number_of_menus = meal_arg_input()
         
-        print("Temporary meal generator placeholder, with " + str(number_of_menus) + " menu(s)")
-        meal_generator.MealGenerator()
+        meal_generator.generate_meal(number_of_menus)
         quit()
         #Find a way to execute the execute meal_generator, or create a generator and generate a menu here
     else:
@@ -80,8 +78,7 @@ if __name__ == '__main__':
     elif(user_in.__eq__("2")):
         number_of_menus = meal_arg_input() #Also considers "back" and "quit"
         
-        print("Temporary meal generator placeholder, with " + str(number_of_menus) + " menu(s)")
-        meal_generator.MealGenerator()
+        meal_generator.generate_meal(number_of_menus)
         quit()
         #Find a way to execute the execute meal_generator, or create a generator and generate a menu here
     else:
