@@ -16,6 +16,7 @@ class Kolmogorov(object):
         '''
         Constructor
         '''
+        
     def ingredient_availability_score(self, nbr_of_days):
         return log2(365/nbr_of_days)/coefs.ingredient_availability_coef #ici on peut mettre ce coef à 1 et pondérer les autres relativement
     
@@ -34,11 +35,11 @@ class Kolmogorov(object):
         popularity_frequency = history.popularity_frequency(ingredient) #Frequence at which the 
         return self.ingredient_availability_score(nbr_of_days) + self.personal_occurence_score(nbr_of_personal_occurrences, 1.5) + self.popularity_score(popularity_frequency)
         
-    def kolmogorov_recipe(self, recipe):
-        complexity = 0
-        for ingredient in recipe.get_ingredients():
-            complexity += self.kolmogorov_aliment(ingredient)
-        return complexity/coefs.normalization_kolmogorov_alimentary_sequence
+    def kolmogorov_sequence(self, sequence):
+        interest_score = 0
+        for ingredient in sequence.get_ingredients():
+            interest_score += self.kolmogorov_aliment(ingredient)
+        return interest_score/coefs.normalization_kolmogorov_alimentary_sequence
     
     def maj_weights(self, environnement, history, keyword_weights_pairs): #TODO
         return 1
