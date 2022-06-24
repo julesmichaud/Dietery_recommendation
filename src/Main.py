@@ -11,6 +11,7 @@ Created on 22 juin 2022
 from click._compat import raw_input
 from asyncio.tasks import sleep
 from comtypes._comobject import catch_errors
+from src import meal_generator
 
 def is_back(user_in):
     str.lower(user_in)
@@ -71,6 +72,7 @@ if __name__ == '__main__':
         exit(0)
     elif(user_in.__eq__("1")):
         print("Temporary menu placeholder")
+        meal_generator.MealGenerator()
         #Find a way to execute the general_menu file...
     elif(user_in.__eq__("2")):
         number_of_menus = meal_arg_input()
@@ -82,3 +84,4 @@ if __name__ == '__main__':
     else:
         print("Unrecognized input, please try again")
         wrong_or_back_input();
+    exit(1)

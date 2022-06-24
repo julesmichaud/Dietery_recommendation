@@ -30,6 +30,6 @@ class History() :
     def add_appreciation(self, appreciation):
         self.appreciations.append(appreciation)
     
-    def add_rateed_meal(self, meal, appreciation):
+    def add_rated_meal(self, meal, appreciation):
         self.add_meal(meal)
         self.add_appreciation(appreciation)

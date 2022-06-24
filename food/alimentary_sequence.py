@@ -6,7 +6,7 @@ Created on Jun 20, 2022
 
 from datetime import *
 
-class Alimentary_sequence:
+class Alimentary_sequence(object):
     '''
     classdocs
     '''
