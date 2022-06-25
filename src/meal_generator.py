@@ -4,10 +4,12 @@ Created on 22 juin 2022
 @author: Aurelien Giroux
 '''
 from food.alimentary_sequence import Alimentary_sequence
-import ingredients #new class, which has all aliments listed by categories under the form of a list of lists : a list is a category, which contains lists that represent types
+from food import Ingredients #new class, which has all aliments listed by categories under the form of a list of lists : a list is a category, which contains lists that represent types
 import random
 from kolmogorov import Kolmogorov
 from user import History
+
+ingredients = Ingredients.Ingredients
 
 def explore_type(type, n): #type is a list of ingredients
     explored_ingredient_indexes = []
@@ -27,16 +29,16 @@ def explore_type(type, n): #type is a list of ingredients
     return least_complex_couple
 
 def select_neighbours(ingredient, k, n):
-    category_index = ingredients.get_category_index(ingredient) #We get the index of the category of the aliment
-    type_index = ingredients.get_type_index(category_index,ingredient) #We get the index of the type whithin the category
+    category_indexes = ingredients.get_category_index(ingredient) #We get the indexes of the category of the aliment
+    type_index = ingredients.get_type_index(category_indexes,ingredient) #We get the index of the type whithin the category
     explored_category_indexes = [type_index]
-    least_complex_list = [explore_type(category_index,type_index)]
+    least_complex_list = [explore_type(category_indexes,type_index)]
     
     for i in range(k-1): #We explore k neighboring types within the category, and n ingredients whithin each type
         type_index = random.randint(0,ingredients.get_set_of_categories_size())
-        while(type_index in explored_types_indexes):
-            category_index = random.randint(0,ingredients.get_set_of_categories_size())
-        explored_types_indexes.append(type_index)
+        while(type_index in explored_category_indexes):
+            type_index = random.randint(0,category_indexes.size())
+        explored_category_indexes.append(type_index)
         type = ingredients.get_type(type_index)
         least_complex_list.append(explore_type(type,n))
     return least_complex_list #format : a list of lists : these lists contain the complexity of the ingredient, and the ingredient
