@@ -49,7 +49,6 @@ def select_neighbors(ingredient, k, n):
     k = smallest_out_of_two(k, len(category_indexes))
     
     for i in range(k-1): #We explore k neighboring types within the category, and n ingredients whithin each type
-        print("Entered select_neighbors for loop")
         type_index = random.randint(category_indexes[0],category_indexes[-1])
         while(type_index in explored_category_indexes):
             type_index = random.randint(category_indexes[0],category_indexes[-1])
@@ -62,7 +61,6 @@ def select_neighbors(ingredient, k, n):
     return least_complex_list
 
 def select_neighbor(least_complex_list):
-    print(str(least_complex_list))
     min_ingredient = least_complex_list[0]
     min_complexity = ingredients.get_complexity(ingredients, min_ingredient)
     for ingredient in least_complex_list:
@@ -74,7 +72,6 @@ def select_neighbor(least_complex_list):
 
 def generate_ingredient(source_ingredient, k, n):
     selected_ingredient = select_neighbor(select_neighbors(source_ingredient, k, n)) 
-    print("\n We have now selected : " + selected_ingredient)
     return selected_ingredient
     
 
@@ -84,9 +81,19 @@ def generate_meal():
     for i in range(len(ingredients)):
         ingredients[i]=generate_ingredient(ingredients[i],2,2)
     sequence = Alimentary_sequence(ingredients, time)
-    print("Done ! Here you go ;)\n")
+    print("\n")
     print(sequence)
     print("\n")
+    return sequence
 
+def explain_meal(origin_sequence, generated_sequence):
+    for i in range(len(origin_sequence)):
+        #Before anything, get a hold of the intermediate values for the calculation of each of the meals' complexities, and compare them
+        #We can get information by comparing the different factors of complexity, as well as with somewhat arbitrary thresholds for things like the rarity of a product
+        if(origin_sequence[i]==generated_sequence[i]):
+            print("Comme vous avez semble beaucoup aimer " + origin_sequence[i] + ", nous vous l'avons repropose.")
+        else:
+            print("Pour changer de " + origin_sequence[i] + ", nous vous avons propose plutot " + generated_sequence[i] + ".")
+        
 if __name__ == '__main__':
     generate_meal()
