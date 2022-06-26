@@ -25,6 +25,10 @@ class Ingredients(object):
         print("No such ingredient")
         return None
     
+    def get_type_from_index(self,type_index):
+        ingredients_list = [["concombre","tomate","salade"],["pomme de terre","tomate","topinambour","epinards"],["riz","pates","pain","quiche"],["blancs de poulet","cote de porc", "gigot d'agneau"],["pave de saumon","dos de cabillaud", "steack de thon"],["yaourt","reblochon"]]
+        return ingredients_list[type_index]
+    
     def get_type_index(self, target_ingredient):
         ingredients_list = [["concombre","tomate","salade"],["pomme de terre","tomate","topinambour","epinards"],["riz","pates","pain","quiche"],["blancs de poulet","cote de porc", "gigot d'agneau"],["pave de saumon","dos de cabillaud", "steack de thon"],["yaourt","reblochon"]]
         for i in range(len(ingredients_list)):

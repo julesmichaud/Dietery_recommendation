@@ -50,12 +50,12 @@ def select_neighbors(ingredient, k, n):
     
     for i in range(k-1): #We explore k neighboring types within the category, and n ingredients whithin each type
         print("Entered select_neighbors for loop")
-        type_index = random.randint(0,len(category_indexes))
+        type_index = random.randint(category_indexes[0],category_indexes[-1])
         while(type_index in explored_category_indexes):
-            type_index = random.randint(0,len(category_indexes))
+            type_index = random.randint(category_indexes[0],category_indexes[-1])
             
         explored_category_indexes.append(type_index)
-        type = ingredients.get_type(ingredients,ingredient)
+        type = ingredients.get_type_from_index(ingredients,type_index)
         n_type = smallest_out_of_two(n, len(type))
         least_complex_list.append(explore_type(type,n_type))
         
