@@ -77,8 +77,9 @@ if __name__ == '__main__':
         #Find a way to execute the general_menu file...
     elif(user_in.__eq__("2")):
         number_of_menus = meal_arg_input() #Also considers "back" and "quit"
-        
-        meal_generator.generate_meal(number_of_menus)
+        print("Generating " + str(number_of_menus) + " menu(s)...")
+        for i in range(number_of_menus):
+            meal_generator.generate_meal()
         quit()
         #Find a way to execute the execute meal_generator, or create a generator and generate a menu here
     else:
