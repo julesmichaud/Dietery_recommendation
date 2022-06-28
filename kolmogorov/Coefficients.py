@@ -1,7 +1,7 @@
 '''
 Created on 21 juin 2022
 
-@author: Aurélien Giroux
+@author: Aurelien Giroux
 '''
 
 class Coefficients(object):
@@ -13,7 +13,9 @@ class Coefficients(object):
         '''
         Constructor
         '''
-        self.normalization_kolmogorov_ingredient = 1
+        self.ingredient_availability_coef = 1
+        self.personal_occurence_coef = 1
+        self.popularity_coef = 1
         self.normalization_kolmogorov_alimentary_sequence = 1
         self.keyword_influence_coefficients_pairs = {}
         #etc... incomplete list, which values have to be updated according to our needs
