@@ -1,7 +1,7 @@
 '''
 Created on 20 juin 2022
 
-@author: Aurélien Giroux
+@author: Aurelien Giroux
 '''
 
 class Ingredient(object):
