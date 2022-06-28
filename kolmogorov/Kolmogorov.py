@@ -24,8 +24,9 @@ class Kolmogorov(object):
     def ingredient_availability_score(self, nbr_of_days):
         return log2(365/nbr_of_days)/coefs.Coefficients.ingredient_availability_coef #ici on peut mettre ce coef à 1 et pondérer les autres relativement
     
-    def personal_occurence_score(self, nbr_of_personal_occurrences):
+    def personal_occurence_score(self, nbr_of_personal_occurrences, mean, timespan):
         x = nbr_of_personal_occurrences
+        return log2(timespan/(1+abs(x-mean)))
         #q = filter_quality_factor
         #return log2(0.5 + 1/sqrt((1-(x-0.1)**2)**2+((x-0.1)/q)**2))/coefs.personal_occurence_coef
     

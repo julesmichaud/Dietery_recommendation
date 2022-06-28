@@ -81,8 +81,8 @@ if __name__ == '__main__':
         origin_sequence = Alimentary_sequence(["salade","pave de saumon", "epinards", "yaourt"],0) #To initialize with the ingredients of the last meal from History
         print("Generating " + str(number_of_menus) + " menu(s)...\n")
         for i in range(number_of_menus):
-            generated_sequence = meal_generator.generate_meal()
-            meal_generator.explain_meal(origin_sequence.get_ingredients(), generated_sequence.get_ingredients())
+            generated_sequence = meal_generator.Meal_generator.generate_meal(meal_generator.Meal_generator)
+            meal_generator.Meal_generator.explain_meal(meal_generator.Meal_generator,origin_sequence.get_ingredients(), generated_sequence.get_ingredients())
             origin_sequence = generated_sequence
         print("Done ! Here you go ;)\n")
         quit()
