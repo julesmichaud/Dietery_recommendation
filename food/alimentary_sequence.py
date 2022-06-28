@@ -1,12 +1,12 @@
 '''
 Created on Jun 20, 2022
 
-@author: valerio
+@authors: Valerio Guerrini, Aurelien Giroux
 '''
 
 from datetime import *
 
-class Alimentary_sequence:
+class Alimentary_sequence(object):
     '''
     classdocs
     '''
@@ -17,6 +17,10 @@ class Alimentary_sequence:
         '''
         self.set_ingredients(ingredients)#A list of [ingredient, quantity], where quantity is the quantity of ingredient necessary to make the recipe
         self.set_time(time)#The time necessary to make the recipe
+    
+    def __str__(self, *args, **kwargs):
+        toprint = "Starter : " + self.ingredients[0] + "\nMain course : " + self.ingredients[1] + " and " + self.ingredients[2] + "\nDessert : " + self.ingredients[3]
+        return toprint
         
     def set_ingredients(self, ingredients):
         self.ingredients = ingredients
@@ -53,8 +57,3 @@ class Alimentary_sequence:
             if enddate<maxdate:
                 maxdate=enddate
         return [mindate,maxdate]
-        
-    
-    
-            
-            
