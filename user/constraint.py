@@ -3,24 +3,24 @@ Created on 21 juin 2022
 
 @author: Jules Michaud
 '''
-class Constraint() :
+from abc import ABC
 
-    def __init__(self, importance, description):
+class Constraint(ABC) :
+
+    def __init__(self, ingredients_type):
         '''
         Constructor
         '''
-        self.importance = importance
-        self.description = description
+        self.importance = ingredients_type
     
-    def set_importance(self, importance):
-        self.importance = importance
+    def set_ingredients_type(self, ingredients_type):
+        self.ingredients_type = ingredients_type
     
-    def set_description(self, description):
-        self.description = description
+   
+    def get_ingredients_type(self):
+        return ingredients_type
     
-    def get_importance(self):
-        return self.importance
+    @abstractmethod
+    def constraint_interest(self):
+        pass 
     
-    def get_description(self):
-        return self.description
-     
