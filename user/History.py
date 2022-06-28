@@ -3,6 +3,9 @@ Created on 21 juin 2022
 
 @author: Jules Michaud
 '''
+
+import Ingredients
+
 class History() :
 
     def __init__(self, meals, appreciations):
@@ -36,16 +39,20 @@ class History() :
         
     def search_ingredient(self, ingredient):
         count = 0
-        for i in range 14:
-            for elem in get_starter(meals[-i]):
+        for i in range (14):
+            for elem in (meals[-i]).get_starter:
                 if elem == ingredient:
                     count+=1
-            for elem in get_maincourse(meals[-i]):  
+            for elem in (meals[-i]).get_maincourse:  
                 if elem == ingredient:
                     count+=1
-            for elem in get_dessert(meals[-i]):  
+            for elem in (meals[-i]).get_dessert:  
                 if elem == ingredient:
                     count+=1  
         return count            
-                
-            
+    
+    def quantity_by_type(self, type_index):            
+        count = 0 
+        for elem in Ingredients.get_type_from_index(type_index)
+            count+= search_ingredient(elem)
+        return count
