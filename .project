@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
+	<name>PAFRecommandation</name>
+=======
 	<name>Dietery_recommendation</name>
+>>>>>>> 42535fdef7bdba2a6706f1d7a0bd5d80d6702d6c
 	<comment></comment>
 	<projects>
 	</projects>
