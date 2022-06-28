@@ -36,14 +36,14 @@ class History() :
         
     def search_ingredient(self, ingredient):
         count = 0
-        for i in range 14:
-            for elem in get_starter(meals[-i]):
+        for i in range(14):
+            for elem in self.get_starter(self.get_meals()[-i]):
                 if elem == ingredient:
                     count+=1
-            for elem in get_maincourse(meals[-i]):  
+            for elem in self.get_maincourse(self.get_meals()[-i]):  
                 if elem == ingredient:
                     count+=1
-            for elem in get_dessert(meals[-i]):  
+            for elem in self.get_dessert(self.get_meals()[-i]):  
                 if elem == ingredient:
                     count+=1  
         return count            
