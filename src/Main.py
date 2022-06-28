@@ -56,7 +56,7 @@ def back_input_after_2():
     elif(user_in.__eq__("2")):
         number_of_menus = meal_arg_input()
         
-        meal_generator.generate_meal(number_of_menus)
+        meal_generator.Meal_generator.generate_meal(number_of_menus)
         quit()
         #Find a way to execute the execute meal_generator, or create a generator and generate a menu here
     else:

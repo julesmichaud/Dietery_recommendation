@@ -78,6 +78,7 @@ class Meal_generator(object):
         
     def generate_meal(self):
         ingredients = ["salade","pave de saumon", "epinards", "yaourt"] #To initialize with the ingredients of the last meal from History
+        #ingredients = History.History.get_meals(History.History)[-1]
         time = 0
         for i in range(len(ingredients)):
             ingredients[i]=self.generate_ingredient(self,ingredients[i],2,2)
@@ -95,4 +96,10 @@ class Meal_generator(object):
                 print("Comme vous avez semble beaucoup aimer " + origin_sequence[i] + ", nous vous l'avons repropose.")
             else:
                 print("Pour changer de " + origin_sequence[i] + ", nous vous avons propose plutot " + generated_sequence[i] + ".")
-            
+            original_complixity_factors = Kolmogorov.Kolmogorov.explainable_kolmogorov_ingredient(Kolmogorov.Kolmogorov, origin_sequence[i], History.History)
+            generated_complixity_factors = Kolmogorov.Kolmogorov.explainable_kolmogorov_ingredient(Kolmogorov.Kolmogorov, generated_sequence[i], History.History)
+            for j in range(len(original_complixity_factors)):
+                current_difference = generated_complixity_factors[j] - original_complixity_factors[j]
+                if(current_difference>2): #Change deemed significant regarding specific aspect
+                    if(j==0): #Surprise sur la période de disponibilité
+                        print(""+ str(generated_sequence[i]) + " n'est disponible que " + ingredients.get_availability_period(generated_sequence[i]) + "jours cette année")
