@@ -34,10 +34,12 @@ class Kolmogorov(object):
     def personal_constraint_score(self, ingredient):
         ''' Returns the component of the simplicity linked to the difference between the user's diet and a typical french person's diet '''
         type_index = Ingredients.get_type_index(self, ingredient)
+        expectation = Ingredients.get_average_consumption(ingredient)
+        excentricity_complexity = User.excentricity_complexity(User, expectation, ingredient)
         if(type_index == 3):
-            return User.constraints_complexity(User,3)
+            return User.constraints_complexity(User,3) + excentricity_complexity
         elif(type_index == 4):
-            return User.constraints_complexity(User,4)
+            return User.constraints_complexity(User,4) + excentricity_complexity
         return None
     
         #return log2(timespan/(1+abs(x-mean)))
@@ -64,10 +66,12 @@ class Kolmogorov(object):
     
     def explainable_constraint_score(self, ingredient):
         type_index = Ingredients.get_type_index(self, ingredient)
+        expectation = Ingredients.get_average_consumption(ingredient)
+        excentricity_complexity = User.excentricity_complexity(User, expectation, ingredient)
         if(type_index == 3):
-            return User.constraints_complexity(User,3)
+            return User.constraints_complexity(User,3) + excentricity_complexity
         elif(type_index == 4):
-            return User.constraints_complexity(User,4)
+            return User.constraints_complexity(User,4) + excentricity_complexity
         return None
     
     def explainable_kolmogorov_ingredient(self, ingredient)
