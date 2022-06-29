@@ -13,18 +13,21 @@ from src import meal_generator
 from food.alimentary_sequence import Alimentary_sequence
 
 def is_back(user_in):
+    ''' Checks if the user input said to go back a step in the program '''
     str.lower(user_in)
     if(user_in.__eq__("back")):
         return True
     return False
 
 def is_exit(user_in):
+    ''' Checks if the user input said to exit the program '''
     str.lower(user_in)
     if(user_in.__eq__("exit")):
         return True
     return False
 
 def meal_arg_input():
+    ''' Takes and checks the user input when we ask to input a menu '''
     number_str = raw_input("Please indicate how many menus you would like to generate\n")
     if(is_exit(number_str)):
         quit()
@@ -42,9 +45,11 @@ def meal_arg_input():
     return number_int
     
 def get_number_of_menus():
+    ''' Returns the number of menus selected by the user, used to communicate this information to the meal_generator '''
     return number_of_menus
 
 def back_input_after_2():
+    ''' Function called when the user types "back" after selecting the option "2" in the user menu '''
     user_in = raw_input("Type '1' to change your parameters and '2' to generate a meal. At any moment, type 'back' to go back and 'exit' to exit\n")
     if(is_back(user_in) or is_exit(user_in)):
         print("See you soon !")
@@ -56,9 +61,15 @@ def back_input_after_2():
     elif(user_in.__eq__("2")):
         number_of_menus = meal_arg_input()
         
-        meal_generator.generate_meal(number_of_menus)
+        origin_sequence = Alimentary_sequence(["salade","pave de saumon", "epinards", "yaourt"],0) #To initialize with the ingredients of the last meal from History
+        print("Generating " + str(number_of_menus) + " menu(s)...\n")
+        for i in range(number_of_menus):
+            generated_sequence = meal_generator.Meal_generator.generate_meal(meal_generator.Meal_generator)
+            meal_generator.Meal_generator.explain_meal(meal_generator.Meal_generator,origin_sequence.get_ingredients(), generated_sequence.get_ingredients())
+            origin_sequence = generated_sequence
+        print("Done ! Here you go ;)\n")
+        
         quit()
-        #Find a way to execute the execute meal_generator, or create a generator and generate a menu here
     else:
         print("Unrecognized input, please try again")
         back_input_after_2();
@@ -78,6 +89,7 @@ if __name__ == '__main__':
         #Find a way to execute the general_menu file...
     elif(user_in.__eq__("2")):
         number_of_menus = meal_arg_input() #Also considers "back" and "quit"
+        
         origin_sequence = Alimentary_sequence(["salade","pave de saumon", "epinards", "yaourt"],0) #To initialize with the ingredients of the last meal from History
         print("Generating " + str(number_of_menus) + " menu(s)...\n")
         for i in range(number_of_menus):
@@ -85,8 +97,8 @@ if __name__ == '__main__':
             meal_generator.Meal_generator.explain_meal(meal_generator.Meal_generator,origin_sequence.get_ingredients(), generated_sequence.get_ingredients())
             origin_sequence = generated_sequence
         print("Done ! Here you go ;)\n")
+        
         quit()
-        #Find a way to execute the execute meal_generator, or create a generator and generate a menu here
     else:
         print("Unrecognized input, please try again")
         back_input_after_2();

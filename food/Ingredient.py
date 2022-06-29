@@ -33,3 +33,6 @@ class Ingredient(object):
     
     def set_local_availability_period(self, local_availability_period):
         self.local_availability_period = local_availability_period
+    
+    def get_availability_period(self):
+        return self.local_availability_period
