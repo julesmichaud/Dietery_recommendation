@@ -3,7 +3,7 @@ Created on 25 juin 2022
 
 @author: Aurelien Giroux
 '''
-
+from food.Ingredient import Ingredient
 class Ingredients(object):
     '''
     classdocs
@@ -20,11 +20,19 @@ class Ingredients(object):
             file=open('dietery_recommendation/data/sorted_by_categories/'+str_ingredients[i]+'.csv','r')
             lines=file.read_lines()
             file.close()
-            ingredients[i]=lines
-        self.ingredients_list = ingredients
+            new_lines=[]
+            for line in lines:
+                new_lines.append(line.strip().split(';'))
+            ingredients[i]=new_lines
+        #self.ingredients_list = ingredients
+        for ingredient_param in ingredients:
+            ingredient = Ingredient(ingredient_param)
+            self.ingredients_list.append(ingredient)
         self.category_indexes_list = [[0],[1,2],[3,4],[5]]
         self.complexity_list = [[1.3,2.,1.4],[0.4,0.5,4.6,1.2],[0.39,0.35,0.8,1.8],[0.6,0.9,1.9],[0.7,2.3,3.1],[0.5,1.2]]
         
+    total_meals=256301
+    
     def get_type(self,target_ingredient):
 
         for type in self.ingredients_list:
@@ -63,7 +71,22 @@ class Ingredients(object):
                 return category_indexes
         return None
     
-
+    def get_information_ingredient(self,target_ingredient):
+        '''return list with all information about target_ingredient'''
+        for plate in self.ingredients:
+            for ingredient in plate:
+                if target_ingredient=ingredient[3]:
+                    return ingredient
+                
+    def get_average_consumption(self,ingredient):
+        '''11000 correspond à une valeur approximative du nombre de participants à inc3'''
+        return int(ingredient[-1])/11000
+    
+    def get_popularity_frequency(self,ingredient):
+        '''256301 correspond au nombre d'aliments consommé pendant l'etude inca3'''
+        return int(ingredient[-1])/256301
+    
+    
     # def get_complexity(self, target_ingredient):
     #     i = self.get_type_index(self, target_ingredient)
     #     type = self.ingredients_list[i]
