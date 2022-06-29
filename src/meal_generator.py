@@ -8,6 +8,8 @@ from food import Ingredients #new class, which has all aliments listed by catego
 import random
 from kolmogorov import Kolmogorov
 from user import History
+from random import random as rand
+from math import *
 
 ingredients = Ingredients.Ingredients
 
@@ -89,17 +91,25 @@ class Meal_generator(object):
         return sequence
     
     def explain_meal(self,origin_sequence, generated_sequence):
+        L1=["Comme vous avez semble-t-il beaucoup aime ","Puisque vous avez apprÃ©cie ","Vous avez l'air d'avoir aime "] #synonym list 1 not to produce sentences that are too "artificial" for users
+        L2=[", nous vous l'avons repropose."," nous vous l'avons donc resuggere"," nous vous en proposons donc un peu plus dans votre assiette"," nous vous en proposons donc encore un petit peu"]
+        p1,p2=rand(),rand() #This random floats are there to make us choose which synonym will be used in the following sentence
+        
         for i in range(len(origin_sequence)):
             #Before anything, get a hold of the intermediate values for the calculation of each of the meals' complexities, and compare them
             #We can get information by comparing the different factors of complexity, as well as with somewhat arbitrary thresholds for things like the rarity of a product
             if(origin_sequence[i]==generated_sequence[i]):
-                print("Comme vous avez semble beaucoup aimer " + origin_sequence[i] + ", nous vous l'avons repropose.")
+                p=rand() #choose a random float between 0 and 1
+                if p<=1/2:              
+                    print(L1[ceil(3*p1)-1] + origin_sequence[i] + L2[ceil(4*p2)-1])
+                else:
+                    print(origin_sequence[i]+" vous a apparemment convaincu, c'est pourquoi nous vous le proposons a nouveau")
             else:
                 print("Pour changer de " + origin_sequence[i] + ", nous vous avons propose plutot " + generated_sequence[i] + ".")
-            original_complixity_factors = Kolmogorov.Kolmogorov.explainable_kolmogorov_ingredient(Kolmogorov.Kolmogorov, origin_sequence[i], History.History)
-            generated_complixity_factors = Kolmogorov.Kolmogorov.explainable_kolmogorov_ingredient(Kolmogorov.Kolmogorov, generated_sequence[i], History.History)
-            for j in range(len(original_complixity_factors)):
-                current_difference = generated_complixity_factors[j] - original_complixity_factors[j]
-                if(current_difference>2): #Change deemed significant regarding specific aspect
-                    if(j==0): #Surprise sur la période de disponibilité
-                        print(""+ str(generated_sequence[i]) + " n'est disponible que " + ingredients.get_availability_period(generated_sequence[i]) + "jours cette année")
+            #original_complixity_factors = Kolmogorov.Kolmogorov.explainable_kolmogorov_ingredient(Kolmogorov.Kolmogorov, origin_sequence[i], History.History)
+           # generated_complixity_factors = Kolmogorov.Kolmogorov.explainable_kolmogorov_ingredient(Kolmogorov.Kolmogorov, generated_sequence[i], History.History)
+           # for j in range(len(original_complixity_factors)):
+               # current_difference = generated_complixity_factors[j] - original_complixity_factors[j]
+               # if(current_difference>2): #Change deemed significant regarding specific aspect
+                   # if(j==0): #Surprise sur la pï¿½riode de disponibilitï¿½
+                      #  print(""+ str(generated_sequence[i]) + " n'est disponible que " + ingredients.get_availability_period(generated_sequence[i]) + "jours cette annï¿½e")
