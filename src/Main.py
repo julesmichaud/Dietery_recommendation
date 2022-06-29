@@ -10,6 +10,7 @@ Created on 22 juin 2022
 # - After being done with a menu, always redirect to the previous menu. Always offer a "go back" option
 from click._compat import raw_input
 from src import meal_generator
+from food.alimentary_sequence import Alimentary_sequence
 
 def is_back(user_in):
     str.lower(user_in)
@@ -50,14 +51,12 @@ def back_input_after_2():
         quit()
     elif(user_in.__eq__("1")):
         print("Temporary menu placeholder")
-        meal_generator.MealGenerator()
         quit()
         #Find a way to execute the general_menu file...
     elif(user_in.__eq__("2")):
         number_of_menus = meal_arg_input()
         
-        print("Temporary meal generator placeholder, with " + str(number_of_menus) + " menu(s)")
-        meal_generator.MealGenerator()
+        meal_generator.Meal_generator.generate_meal(number_of_menus)
         quit()
         #Find a way to execute the execute meal_generator, or create a generator and generate a menu here
     else:
@@ -79,9 +78,13 @@ if __name__ == '__main__':
         #Find a way to execute the general_menu file...
     elif(user_in.__eq__("2")):
         number_of_menus = meal_arg_input() #Also considers "back" and "quit"
-        
-        print("Temporary meal generator placeholder, with " + str(number_of_menus) + " menu(s)")
-        meal_generator.MealGenerator()
+        origin_sequence = Alimentary_sequence(["salade","pave de saumon", "epinards", "yaourt"],0) #To initialize with the ingredients of the last meal from History
+        print("Generating " + str(number_of_menus) + " menu(s)...\n")
+        for i in range(number_of_menus):
+            generated_sequence = meal_generator.Meal_generator.generate_meal(meal_generator.Meal_generator)
+            meal_generator.Meal_generator.explain_meal(meal_generator.Meal_generator,origin_sequence.get_ingredients(), generated_sequence.get_ingredients())
+            origin_sequence = generated_sequence
+        print("Done ! Here you go ;)\n")
         quit()
         #Find a way to execute the execute meal_generator, or create a generator and generate a menu here
     else:
