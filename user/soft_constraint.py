@@ -5,17 +5,19 @@ Created on 21 juin 2022
 '''
 from math import log2
 import History
+import Constraint
 
-class SoftConstraint() :
+class SoftConstraint(Constraint) :
 
     def __init__(self, ingredients_type, importance, max_quantity, history):
         '''
         Constructor
         '''
+        super.__init__(ingredients_type)
         self.importance = importance
         self.max_quantity = max_quantity
         self.history = history
-        self.ingredients_type = ingredients_type
+        
     
     def get_importance(self) :
         return self.importance
@@ -26,8 +28,6 @@ class SoftConstraint() :
     def get_history(self) :
         return self.history.get_history()
     
-    def get_ingredients_type(self) :
-        return self.ingredients_type
 
     def set_importance(self, importance):
         self.importance = importance
@@ -38,8 +38,6 @@ class SoftConstraint() :
     def set_history(self, history):
         self.history = history
     
-    def set_ingredients_type(self, ingredients_type):
-        self.ingredients_type = ingredients_type
     
     def constraint_interest(self):
         meals = self.get_history().get_meals()
