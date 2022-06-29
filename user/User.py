@@ -35,5 +35,5 @@ class User() :
                     complexity += constraint.constraint_interest()
         return complexity
     
-    def excentricity_complexity(self, expectation, ingredient):
+    def excentricity_complexity(self, expectation, ingredient): #returns the complexity due to the excentricity of the actual alimentation of the user
         return  log2(28/(1+abs(history.search_ingredient(ingredient)-expectation)))
