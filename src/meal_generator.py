@@ -30,12 +30,10 @@ class Meal_generator(object):
                 ingredient_index = random.randint(0,len(type)-1)
             ingredient = type[ingredient_index]
             explored_ingredient_indexes.append(ingredient_index)
-            #current_complexity = Kolmogorov.Kolmogorov.kolmogorov_ingredient(Kolmogorov.Kolmogorov, ingredient, History.History)
-            current_complexity = ingredients.get_complexity(ingredients, ingredient)
+            current_complexity = Kolmogorov.Kolmogorov.kolmogorov_ingredient(Kolmogorov.Kolmogorov, ingredient)#, History.History)
+            #current_complexity = ingredients.get_complexity(ingredients, ingredient)
             if(current_complexity<min_complexity):
                 min_complexity = current_complexity
-                #least_complex_couple[0]=min_complexity
-                #least_complex_couple[1]=ingredient
                 least_complex_ingredient = ingredient
         return least_complex_ingredient
     
@@ -43,7 +41,6 @@ class Meal_generator(object):
         ''' Returns the least complex ingredients present in each type of the category of the input ingredient '''
         category_indexes = ingredients.get_category_indexes(ingredients,ingredient) #We get the indexes of the category of the aliment
         type_index = ingredients.get_type_index(ingredients,ingredient) #We get the index of the type whithin the category
-        
         
         explored_category_indexes = [type_index]
         type = ingredients.get_type(ingredients,ingredient)
