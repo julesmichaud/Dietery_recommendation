@@ -9,11 +9,11 @@ import Constraint
 
 class SoftConstraint(Constraint) :
 
-    def __init__(self, ingredients_type, importance, max_quantity, history):
+    def __init__(self, ingredients_type_index, importance, max_quantity, history):
         '''
         Constructor
         '''
-        super.__init__(ingredients_type)
+        super.__init__(ingredients_type_index)
         self.importance = importance
         self.max_quantity = max_quantity
         self.history = history
@@ -42,7 +42,7 @@ class SoftConstraint(Constraint) :
     def constraint_interest(self):
         meals = self.get_history().get_meals()
         n = 0
-        for ingredient in self.get_ingredients_type() :
+        for ingredient in self.get_ingredients_type_index() :
             n += meals.count(ingredient)
         if (n == self.get_max_quantity()) :
             return float('inf')

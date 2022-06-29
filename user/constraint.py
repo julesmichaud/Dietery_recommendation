@@ -7,18 +7,18 @@ from abc import ABC
 
 class Constraint(ABC) :
 
-    def __init__(self, ingredients_type):
+    def __init__(self, ingredients_type_index):
         '''
         Constructor
         '''
-        self.importance = ingredients_type
+        self.importance = ingredients_type_index
     
-    def set_ingredients_type(self, ingredients_type):
-        self.ingredients_type = ingredients_type
+    def set_ingredients_type_index(self, ingredients_type_index):
+        self.ingredients_type_index = ingredients_type_index
     
    
-    def get_ingredients_type(self):
-        return ingredients_type
+    def get_ingredients_type_index(self):
+        return ingredients_type_index
     
     @abstractmethod
     def constraint_interest(self):

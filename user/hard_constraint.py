@@ -8,11 +8,11 @@ import Constraint
 
 class HardConstraint(Constraint) :
 
-    def __init__(self, ingredients_type):
+    def __init__(self, ingredients_type_index):
         '''
         Constructor
         '''
-        super.__init__(self,ingredients_type)
+        super.__init__(self,ingredients_type_index)
    
     def constraint_interest(self):
         return float ('inf')

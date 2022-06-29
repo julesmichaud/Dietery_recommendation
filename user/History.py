@@ -5,6 +5,7 @@ Created on 21 juin 2022
 '''
 
 from meal.meal import Meal
+from math import log2, abs
 
 class History() :
 
@@ -58,3 +59,6 @@ class History() :
         for elem in Ingredients.get_type_from_index(type_index)
             count+= self.search_ingredient(elem)
         return count
+    
+    def excentricity_complexity(self, expectation, ingredient):
+        return  log2(28/(1+abs(search_ingredient(ingredient)-expectation)))
