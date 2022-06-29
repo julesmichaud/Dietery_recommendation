@@ -4,7 +4,7 @@ Created on 21 juin 2022
 @author: Jules Michaud
 '''
 
-imort Constraint
+import Constraint
 
 class HardConstraint(Constraint) :
 

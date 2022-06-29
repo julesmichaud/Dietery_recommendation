@@ -47,5 +47,5 @@ class SoftConstraint(Constraint) :
         if (n == self.get_max_quantity()) :
             return float('inf')
         else :
-            return -log2(abs(n - self.get_max_quantity())/ self.get_max_quantity())
+            return -get_importance()*log2(abs(n - self.get_max_quantity())/ self.get_max_quantity())
 

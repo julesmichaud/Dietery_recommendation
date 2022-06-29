@@ -24,3 +24,9 @@ class User() :
     def get_constraints(self):
         return self.constraints
         
+    def constraints_complexity(self, ingredients_type):
+        complexity=0
+        for constraint in constraints:
+            if constraint.get_ingredients_type()==ingredients_type:
+                complexity += constraint.constraint_interest()
+        return complexity
