@@ -60,5 +60,3 @@ class History() :
             count+= self.search_ingredient(elem)
         return count
     
-    def excentricity_complexity(self, expectation, ingredient):
-        return  log2(28/(1+abs(search_ingredient(ingredient)-expectation)))

@@ -7,20 +7,26 @@ from abc import ABC
 
 class Constraint(ABC) :
 
-    def __init__(self, ingredients_type_index):
+    def __init__(self, ingredients_type_index, is_soft):
         '''
         Constructor
         '''
-        self.importance = ingredients_type_index
+        self.importance = set_ingredients_type_index(ingredients_type_index)
+        self.is_soft = set_is_soft(is_soft)
     
     def set_ingredients_type_index(self, ingredients_type_index):
         self.ingredients_type_index = ingredients_type_index
     
-   
+    def set_is_soft(self, is_soft):
+        self.is_soft = is_soft
+
     def get_ingredients_type_index(self):
         return ingredients_type_index
     
+    def get_ingredients_is_soft(self):
+        return ingredients_is_soft
+    
     @abstractmethod
-    def constraint_interest(self):
+    def constraint_interest(self): #returns the constraint interest
         pass 
     

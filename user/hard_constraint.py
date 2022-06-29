@@ -12,7 +12,7 @@ class HardConstraint(Constraint) :
         '''
         Constructor
         '''
-        super.__init__(self,ingredients_type_index)
+        super.__init__(self,ingredients_type_index, False)
    
     def constraint_interest(self):
         return float ('inf')
