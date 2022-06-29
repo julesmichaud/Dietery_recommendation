@@ -14,7 +14,7 @@ class Ingredients(object):
         Constructor
         '''
         self.ingredients_list = [["concombre","tomate","salade"],["pomme de terre","tomate","topinambour","epinards"],["riz","pates","pain","quiche"],["blancs de poulet","cote de porc", "gigot d'agneau"],["pave de saumon","dos de cabillaud", "steack de thon"],["yaourt","reblochon"]]
-        self.category_indexes_list = [[1],[2,3],[4,5],[6]]
+        self.category_indexes_list = [[0],[1,2],[3,4],[5]]
         self.complexity_list = [[1.3,2.,1.4],[0.4,0.5,4.6,1.2],[0.39,0.35,0.8,1.8],[0.6,0.9,1.9],[0.7,2.3,3.1],[0.5,1.2]]
     
     @staticmethod    
@@ -49,7 +49,7 @@ class Ingredients(object):
     def get_category_indexes(self,target_ingredient):
         ''' Returns the indexes in the ingredients_list of the types corresponding to the category of the ingredient given in the parameters '''
         category_indexes_list = [[0],[1,2],[3,4],[5]]
-        type_index = self.get_type_index(self,target_ingredient)
+        type_index = self.get_type_index(target_ingredient)
         for category_indexes in category_indexes_list:
             if type_index in category_indexes:
                 return category_indexes

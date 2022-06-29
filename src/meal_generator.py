@@ -107,7 +107,7 @@ class Meal_generator(object):
                 if(current_difference>2): #Change deemed significant regarding specific aspect
                     if(j==0): #Surprise over availability period of the ingredient
                         print(""+ str(generated_sequence[i]) + " n'est disponible que " + ingredients.get_availability_period(generated_sequence[i]) + "jours cette annee, et c'est pourquoi nous vous l'avons propose")
-                    if(j==2): #Surprise over overall popularity of the ingredient
+                    if(j==1): #Surprise over overall popularity of the ingredient
                         print("Pour vous surprendre au quotidien, nous avons souhaite vous proposer un aliment rarement present dans la diete des francais :" + str(generated_sequence[i]))
                 #if(current_difference<-2):
             
