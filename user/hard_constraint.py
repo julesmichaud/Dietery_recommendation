@@ -3,13 +3,16 @@ Created on 21 juin 2022
 
 @author: Jules Michaud
 '''
-from user import constraint
 
+imort Constraint
 
-class HardConstraints(constraint) :
+class HardConstraint(Constraint) :
 
-    def __init__(self, importance, description):
+    def __init__(self, ingredients_type):
         '''
         Constructor
         '''
-        super(importance, description)
+        super.__init__(self,ingredients_type)
+   
+    def constraint_interest(self):
+        return float ('inf')
