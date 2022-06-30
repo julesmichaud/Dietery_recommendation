@@ -4,7 +4,8 @@ Created on 21 juin 2022
 @author: Jules Michaud
 '''
 from math import log2
-from user.History import History as history
+from user.History import History
+from user.constraint import Constraint
 
 class User() :
 
@@ -12,8 +13,8 @@ class User() :
         '''
         Constructor
         '''
-        self.history = history
-        self.constraints = constraints #a list of constraint
+        self.history = History(history)
+        self.constraints = Constraint(constraints) #a list of constraint
     
     def set_history(self, history):
         self.history = history
@@ -45,5 +46,5 @@ class User() :
         return history.get_last_meal()
     
     def store_user_meal(self,meal):
-        history.add_meal(meal)
+        history.add_meal(history,meal)
     

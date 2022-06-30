@@ -11,8 +11,8 @@ class Constraint(ABC) :
         '''
         Constructor
         '''
-        self.importance = set_ingredients_type_index(ingredients_type_index)
-        self.is_soft = set_is_soft(is_soft)
+        self.importance = self.set_ingredients_type_index(ingredients_type_index)
+        self.is_soft = self.set_is_soft(is_soft)
     
     def set_ingredients_type_index(self, ingredients_type_index):
         self.ingredients_type_index = ingredients_type_index
@@ -21,12 +21,12 @@ class Constraint(ABC) :
         self.is_soft = is_soft
 
     def get_ingredients_type_index(self):
-        return ingredients_type_index
+        return self.ingredients_type_index()
     
     def get_ingredients_is_soft(self):
-        return ingredients_is_soft
+        return self.ingredients_is_soft()
     
-    @abstractmethod
+    #@abstractmethod
     def constraint_interest(self): #returns the constraint interest
         pass
     
