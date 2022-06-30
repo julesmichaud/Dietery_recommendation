@@ -20,6 +20,10 @@ class Kolmogorov(object):
         '''
         Constructor
         '''
+        self.ingredient_availability_coef = 1
+        self.personal_occurence_coef = 1
+        self.popularity_coef = 1
+        self.normalization_kolmogorov_alimentary_sequence = 1
         
     def ingredient_availability_score(self, nbr_of_days):
         ''' Returns the component of the simplicity linked to the availability of an ingredient : the less it appears frequently, the more simple it becomes '''

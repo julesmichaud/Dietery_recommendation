@@ -68,6 +68,7 @@ def back_input_after_2():
             generated_sequence = meal_generator.Meal_generator.generate_meal(meal_generator.Meal_generator, origin_sequence.get_ingredients())
             meal_generator.Meal_generator.explain_meal(meal_generator.Meal_generator,origin_sequence.get_ingredients(), generated_sequence.get_ingredients())
             origin_sequence = generated_sequence
+            User.store_meal(User, generated_sequence)
         print("Done ! Here you go ;)\n")
         
         quit()
@@ -97,8 +98,8 @@ if __name__ == '__main__':
             generated_sequence = meal_generator.Meal_generator.generate_meal(meal_generator.Meal_generator, origin_sequence.get_ingredients())
             meal_generator.Meal_generator.explain_meal(meal_generator.Meal_generator,origin_sequence.get_ingredients(), generated_sequence.get_ingredients())
             origin_sequence = generated_sequence
+            User.store_meal(User, generated_sequence)
         print("Done ! Here you go ;)\n")
-        
         quit()
     else:
         print("Unrecognized input, please try again")
