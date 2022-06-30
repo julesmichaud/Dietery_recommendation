@@ -8,7 +8,7 @@ from food.alimentary_sequence import Alimentary_sequence
 
 class Service(Alimentary_sequence):
     '''
-    classdocs
+    [OUTDATED CLASS] To be deleted...
     '''
 
     def __init__(self, ingredients, time, portion_size):

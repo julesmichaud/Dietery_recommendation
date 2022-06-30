@@ -4,19 +4,20 @@ Created on 25 juin 2022
 @author: Aurelien Giroux
 '''
 from food.Ingredient import Ingredient
+
 class Ingredients(object):
     '''
-    classdocs
+    Stores by categories and types the ingredients of our database, as well as many other information about them
     '''
 
     def __init__(self):
         '''
-        Constructor
+        Reads our pre-treated database, constructs the ingredients objects, and stores them in categories and types
         '''
         ingredients=[None,None,None,None,None]
         str_ingredients=['starters','accompaniments','meats','fishes','desserts']
         for i in range (5):
-            file=open("G:/Télécom Paris/PAF/Dietery_recommendation/data/sorted_by_categories/"+str_ingredients[i]+".csv","r")
+            file=open("G:/Télécom Paris/PAF/Dietery_recommendation/data/sorted_by_categories/"+str_ingredients[i]+".csv","r") #Chemin à adapter !!!!!
             lines=file.readlines()
             file.close()
             new_lines=[]
@@ -29,7 +30,7 @@ class Ingredients(object):
                 ingredient = Ingredient(ingredient_param)
                 self.ingredients_list.append(ingredient)
         self.category_indexes_list = [[0],[1,2],[3,4],[5]]
-        self.complexity_list = [[1.3,2.,1.4],[0.4,0.5,4.6,1.2],[0.39,0.35,0.8,1.8],[0.6,0.9,1.9],[0.7,2.3,3.1],[0.5,1.2]]
+        #self.complexity_list = [[1.3,2.,1.4],[0.4,0.5,4.6,1.2],[0.39,0.35,0.8,1.8],[0.6,0.9,1.9],[0.7,2.3,3.1],[0.5,1.2]]
         self.availability_period = 30
         
     total_meals=256301

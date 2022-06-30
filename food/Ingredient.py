@@ -7,7 +7,7 @@ Created on 20 juin 2022
 
 class Ingredient(object):
     '''
-    classdocs
+    Class dedicated to individual ingredients, and their various properties
     '''
 
     def __init__(self, ingredient_param):
@@ -17,9 +17,9 @@ class Ingredient(object):
         self.name=ingredient_param[2]  # A string giving the name of the ingredient
         # A string giving the nature of the aliment (carbohydrate, protein etc...)
         #self.set_nature(nature)
-        #11000 correspond à une valeur approximative du nombre de participants à inc3'''
+        #11000 corresponds to the approximate value of the number of participants in the inca3 study
         self.average_consumption=(int(ingredient_param[-1])/11000)
-        #256301 correspond au nombre d'aliments consommé pendant l'etude inca3'''
+        #256301 corresponds to the number of ingredients eaten during the inca3 study
         self.popularity_frequency=(int(ingredient_param[-1])/256301)
         # An integer giving the amount of calories per 100 grams of raw aliment
         self.calories_per_hundred_grams=1
@@ -68,4 +68,4 @@ class Ingredient(object):
     
 
     def __eq__(self, other):
-        return (self.get_name() == other.get_name()) and (self.get_nature() == other.get_nature()) and (self.get_calories_per_hundred_grams() == other.get_calories_per_hundred_grams()) and (self.get_carbon_emissions_per_hundred_grams() == other.get_carbon_emissions_per_hundred_grams()) and (self.get_local_availability_period() == other.get_local_availability_period())
+        return (self.get_name() == other.get_name())# and (self.get_nature() == other.get_nature()) and (self.get_calories_per_hundred_grams() == other.get_calories_per_hundred_grams()) and (self.get_carbon_emissions_per_hundred_grams() == other.get_carbon_emissions_per_hundred_grams()) and (self.get_local_availability_period() == other.get_local_availability_period())

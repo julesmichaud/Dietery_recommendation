@@ -8,9 +8,8 @@ from meal.service import Service
 
 class Starter(Service):
     '''
-    classdocs
+    [OUTDATED CLASS] To be deleted...
     '''
-
 
     def __init__(self, ingredients, time, quantity,):
         '''

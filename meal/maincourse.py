@@ -7,7 +7,7 @@ from meal.service import Service
 
 class Maincourse(Service):
     '''
-    classdocs
+    [OUTDATED CLASS] To be deleted...
     '''
 
 

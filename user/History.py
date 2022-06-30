@@ -9,6 +9,9 @@ from math import log2, fabs
 from food.Ingredients import Ingredients
 from food.Ingredient import Ingredient
 class History() :
+    '''
+    This class traces the history of the meals eaten by the user, as a list of meals. For the moment, the history is not saved between one use of the app and another
+    '''
 
     def __init__(self, meals):
         '''

@@ -6,7 +6,7 @@ Created on 21 juin 2022
 
 class Coefficients(object):
     '''
-    classdocs
+    [OUTDATED CLASS] Stores the values of the coefficients associated with the formulas in Kolmogorov, as well as keywords-coefficient pairs that would help change the calculations of Kolmogorov depending on some context elements
     '''
 
     def __init__(self):

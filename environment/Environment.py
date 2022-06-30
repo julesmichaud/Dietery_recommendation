@@ -6,13 +6,12 @@ Created on 21 juin 2022
 
 class environment(object):
     '''
-    classdocs
+    This class contains elements that depend on the environment of the person and that could influence its eating habits. For the moment, this class has no use in the rest of our program
     '''
-
 
     def __init__(self, date,promotions):
         '''
-        Constructor
+        We set up different parameters of the envrionment
         '''
         self.set_date(date) #A string giving the current date 
         self.set_promotions(promotions) #a dictionnary giving Ingredient and market ans promotion associate
@@ -38,6 +37,3 @@ class environment(object):
         promo_ingredient[market]=promotion
         self.promotion[ingredient]=promo_ingredient
         
-        
-        
-    

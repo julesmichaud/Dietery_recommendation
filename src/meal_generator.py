@@ -10,11 +10,17 @@ from kolmogorov import Kolmogorov
 from user import History
 
 class Meal_generator(object):
+    '''
+    Generates one meal, based on the user profile at an instant
+    '''
     
     def __init__(self,user,ingredients):
+        '''
+        Stores the user profile and the ingredients with which the generator will generate meals. We also set a constant which will determine the threshold at which we will print a sentence to the user about the surprising selection of an ingredient
+        '''
         self.user = user
         self.ingredients = ingredients
-        self.detection_threshold = 4
+        self.detection_threshold = 3
         
     def smallest_out_of_two(self,nbr1, nbr2):
         ''' Returns the smallest number out of the two seized '''

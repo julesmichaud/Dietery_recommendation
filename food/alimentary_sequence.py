@@ -8,7 +8,7 @@ from datetime import *
 
 class Alimentary_sequence(object):
     '''
-    classdocs
+    This class describes an "alimentary sequence", which is a list of ingredients and a time of preparation of the whole meal (currently 0 for every meal)
     '''
 
     def __init__(self, ingredients, time):
@@ -47,8 +47,8 @@ class Alimentary_sequence(object):
         return carb
     
     def local_avaibility_period(self): #returns the local availability period of the recipe
-        mindate=(self.ingredients[0][0].get_local_availability_period)[0]
-        maxdate=(self.ingredients[0][0].get_local_availability_period)[1]
+        mindate=(self.ingredients[0][0].get_local_availability_period())[0]
+        maxdate=(self.ingredients[0][0].get_local_availability_period())[1]
         for elem in self.ingredients:
             startdate= (elem[0].get_local_availability_period)[0]
             enddate= (elem[0].get_local_availability_period)[1]

@@ -6,9 +6,8 @@ Created on Jun 20, 2022
 
 class Meal:
     '''
-    classdocs
+    [OUTDATED CLASS] To be deleted...
     '''
-
 
     def __init__(self, starter, maincourse, dessert):
         '''

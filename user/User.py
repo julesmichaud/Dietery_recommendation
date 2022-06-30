@@ -8,6 +8,9 @@ from user.History import History
 from user.constraint import Constraint
 
 class User() :
+    '''
+    Stores the history and constraints linked to a specific. For the moment, the user's profile is not saved between one use of the app and another.
+    '''
 
     def __init__(self, history, constraints):
         '''
