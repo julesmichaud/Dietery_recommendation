@@ -17,7 +17,7 @@ class Ingredients(object):
         ingredients=[None,None,None,None,None]
         str_ingredients=['starters','accompaniments','meats','fishes','desserts']
         for i in range (5):
-            file=open("G:/Télécom Paris/PAF/Dietery_recommendation/data/sorted_by_categories/"+str_ingredients[i]+".csv","r") #Chemin à adapter !!!!!
+            file=open("G:/Télécom Paris/PAF/Dietery_recommendation/data/sorted_by_categories/"+str_ingredients[i]+".csv","r",encoding='utf8') #Chemin à adapter !!!!!
             lines=file.readlines()
             file.close()
             new_lines=[]
