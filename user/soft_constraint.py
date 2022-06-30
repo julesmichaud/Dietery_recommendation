@@ -5,7 +5,7 @@ Created on 21 juin 2022
 '''
 from math import log2
 import History
-import Constraint
+from constraint import Constraint
 
 class SoftConstraint(Constraint) :
 
