@@ -9,43 +9,31 @@ import Constraint
 
 class SoftConstraint(Constraint) :
 
-    def __init__(self, ingredients_type, importance, max_quantity, history):
+    def __init__(self, ingredients_type_index, importance, max_quantity):
         '''
         Constructor
         '''
-        super.__init__(ingredients_type)
-        self.importance = importance
-        self.max_quantity = max_quantity
-        self.history = history
-        
+        super.__init__(ingredients_type_index, True)
+        self.importance = importance #a float between 0 and 1 that specifies the importance of the constraint
+        self.max_quantity = max_quantity #the maximal quantity of ingredient in the type you should eat by week
     
+        
     def get_importance(self) :
         return self.importance
 
     def get_max_quantity(self) :
         return self.max_quantity
     
-    def get_history(self) :
-        return self.history.get_history()
-    
-
     def set_importance(self, importance):
         self.importance = importance
     
     def set_max_quantity(self, max_quantity):
         self.max_quantity = max_quantity
+
     
-    def set_history(self, history):
-        self.history = history
-    
-    
-    def constraint_interest(self):
-        meals = self.get_history().get_meals()
-        n = 0
-        for ingredient in self.get_ingredients_type() :
-            n += meals.count(ingredient)
+    def constraint_interest(self,n): 
         if (n == self.get_max_quantity()) :
             return float('inf')
         else :
-            return -log2(abs(n - self.get_max_quantity())/ self.get_max_quantity())
+            return -self.get_importance()*log2(abs(n - self.get_max_quantity())/ self.get_max_quantity())
 
