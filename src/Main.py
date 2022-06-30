@@ -9,10 +9,12 @@ Created on 22 juin 2022
 #    - If it wants to generate menus, ask how many the user wants
 # - After being done with a menu, always redirect to the previous menu. Always offer a "go back" option
 from click._compat import raw_input
-from src import meal_generator
+from src import meal_generator.Meal_generator
 from food.alimentary_sequence import Alimentary_sequence
 from user.User import User
 from food.Ingredient import Ingredient
+from food.Ingredients import Ingredients
+from src.meal_generator import Meal_generator
 
 def initialisation():
     to_init_list = []
@@ -22,7 +24,6 @@ def initialisation():
     accompagnements = [Ingredient(all_params[10]),Ingredient(all_params[11]),Ingredient(all_params[12]),Ingredient(all_params[13]),Ingredient(all_params[14])]
     desserts = [Ingredient(all_params[15]),Ingredient(all_params[16]),Ingredient(all_params[17]),Ingredient(all_params[18]),Ingredient(all_params[19])]
 
-    
     to_init_list.append(Alimentary_sequence([entrees[0],plats[0],accompagnements[0],desserts[0]], 0)) #1
     to_init_list.append(Alimentary_sequence([entrees[1],plats[0],accompagnements[1],desserts[0]], 0)) #2
     to_init_list.append(Alimentary_sequence([entrees[0],plats[1],accompagnements[1],desserts[2]], 0)) #3
@@ -42,7 +43,8 @@ def initialisation():
     #    User.store_user_meal(User,meal)
         
     user = User(to_init_list, [4, True])
-    return user
+    ingredients = Ingredients()
+    return user, ingredients
 
 def is_back(user_in):
     ''' Checks if the user input said to go back a step in the program '''
@@ -110,7 +112,7 @@ def back_input_after_2():
 
 if __name__ == '__main__':
     number_of_menus = 0
-    user = initialisation()
+    user, ingredients = initialisation()
     print("Welcome ! Would you like to modify your personal parameters or to generate a meal ?");
     
     user_in = raw_input("Type '1' to change your parameters and '2' to generate a meal. At any moment, type 'back' to go back and 'exit' to exit\n")
@@ -127,6 +129,7 @@ if __name__ == '__main__':
         origin_sequence = User.get_last_user_meal(user)
         print("Generating " + str(number_of_menus) + " menu(s)...\n")
         for i in range(number_of_menus):
+            generator = meal_generator.Meal_generator(user,ingredients)
             generated_sequence = meal_generator.Meal_generator.generate_meal(meal_generator.Meal_generator, origin_sequence.get_ingredients())
             meal_generator.Meal_generator.explain_meal(meal_generator.Meal_generator,origin_sequence.get_ingredients(), generated_sequence.get_ingredients())
             origin_sequence = generated_sequence

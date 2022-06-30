@@ -48,5 +48,5 @@ class User() :
         return self.history.get_last_meal()
     
     def store_user_meal(self,meal):
-        history.add_meal(history,meal)
+        self.history.add_meal(self.history,meal)
     
