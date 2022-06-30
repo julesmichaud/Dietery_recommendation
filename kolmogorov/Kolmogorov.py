@@ -7,8 +7,8 @@ Created on 20 Juin, 2022
 from math import log2, sqrt
 import kolmogorov.Coefficients as coefs
 from user.User import User
+from food.Ingredients import Ingredients
 
-##Important
 #Doxygen pour générer la doc des fonctions !!
 
 class Kolmogorov(object):
@@ -22,28 +22,40 @@ class Kolmogorov(object):
         '''
         
     def ingredient_availability_score(self, nbr_of_days):
-        ''' Returns the component of the expected simplicity linked to the availability of an ingredient : the less it appears frequently, the more simple it becomes '''
+        ''' Returns the component of the simplicity linked to the availability of an ingredient : the less it appears frequently, the more simple it becomes '''
         return log2(365/nbr_of_days)/coefs.Coefficients.ingredient_availability_coef #ici on peut mettre ce coef à 1 et pondérer les autres relativement
     
-    def personal_occurence_score(self, nbr_of_personal_occurrences, mean, timespan):
-        ''' Returns the component of the observed simplicity linked to the difference between the user's diet and a typical french person's diet '''
-        x = nbr_of_personal_occurrences
-        return log2(timespan/(1+abs(x-mean)))
-        #If a person eats like a typical french person, its description is simple (we just say he eats like a typical french person), : max simplicity of log2(timespan)
-        #If a person is really "excentric" and eats like a very abnormal french person, we need to describe him specifically (he is thefore complex, and his simplicity tends to be 0)
-    
     def popularity_score(self, popularity_frequency):
-        ''' Returns the component of the expected simplicity linked to the popularity of the aliment in the French population '''
+        ''' Returns the component of the simplicity linked to the popularity of the aliment in the French population '''
         foc = popularity_frequency
         return log2(1/foc)/coefs.Coefficients.popularity_coef
-        #The more the ingredient is used in the french diet, the more complex it becomes, so the simplicity score decreases
+        #The more the ingredient is used in the French diet, the more complex it becomes, so the simplicity score decreases
     
-    def kolmogorov_ingredient(self, ingredient, history): #Criteria : in season / physical distance to supermarket / nature of the ingredient
+    def personal_constraint_score(self, ingredient):
+        ''' Returns the component of the simplicity linked to the difference between the user's diet and a typical french person's diet '''
+        type_index = Ingredients.get_type_index(self, ingredient)
+        expectation = Ingredients.get_average_consumption(ingredient)
+        excentricity_complexity = User.excentricity_complexity(User, expectation, ingredient)
+        if(type_index == 3):
+            return User.constraints_complexity(User,3) + excentricity_complexity
+        elif(type_index == 4):
+            return User.constraints_complexity(User,4) + excentricity_complexity
+        return None
+    
+        #return log2(timespan/(1+abs(x-mean)))
+        #If a person eats like a typical French person, its description is simple (we just say he eats like a typical french person), : max simplicity of log2(timespan)
+        #If a person is really "excentric" and eats like a very abnormal French person, we need to describe him specifically (he is thefore complex, and his simplicity tends to be 0)
+    
+    def health_score(self, ingredient):
+        ''' Returns the health score '''
+    
+    def kolmogorov_ingredient(self, ingredient): #Criteria : in season / physical distance to supermarket / nature of the ingredient
         ''' Returns the aggregated simplicity score of the ingredient '''
-        nbr_of_days = (ingredient.local_availability_period[1]-ingredient.local_availability_period[0]).days #Number of days of availability of the ingredient during the year
-        nbr_of_personal_occurrences = history.search_ingredient(ingredient) #Number of occurrences of the meal during the past week in the history of the user
-        popularity_frequency = history.popularity_frequency(ingredient) #Frequence at which the ingredient is eaten in the population on average
-        return self.ingredient_availability_score(nbr_of_days) + self.personal_occurence_score(nbr_of_personal_occurrences, 1.5) + self.popularity_score(popularity_frequency)
+        availability_period = ingredient.get_local_availability_period(ingredient)
+        nbr_of_days = (availability_period[1]-availability_period[0]).days #Number of days of availability of the ingredient during the year
+        popularity_frequency = Ingredients.get_popularity_frequency(Ingredients,ingredient)#history.popularity_frequency(ingredient) #Frequence at which the 
+        return self.ingredient_availability_score(nbr_of_days) + self.popularity_score(popularity_frequency) - self.personal_constraint_score(ingredient)
+        #global_score = surprise_score - constraint_malus
         
     def kolmogorov_sequence(self, sequence):
         ''' Returns the aggregated simplicity score of the whole sequence '''
@@ -52,12 +64,23 @@ class Kolmogorov(object):
             interest_score += self.kolmogorov_aliment(ingredient)
         return interest_score/coefs.Coefficients.normalization_kolmogorov_alimentary_sequence
     
-    def explainable_kolmogorov_ingredient(self, ingredient)#, history):
+    def explainable_constraint_score(self, ingredient):
+        ''' Returns the '''
+        type_index = Ingredients.get_type_index(self, ingredient)
+        expectation = Ingredients.get_average_consumption(ingredient)
+        excentricity_complexity = User.excentricity_complexity(User, expectation, ingredient)
+        if(type_index == 3):
+            return [User.constraints_complexity(User,3), excentricity_complexity]
+        elif(type_index == 4):
+            return [User.constraints_complexity(User,4), excentricity_complexity]
+        return None
+    
+    def explainable_kolmogorov_ingredient(self, ingredient)
         ''' Returns the list of the simplicity score components for an ingredient '''
-        nbr_of_days = (ingredient.local_availability_period[1]-ingredient.local_availability_period[0]).days #Number of days of availability of the ingredient during the year
-        nbr_of_personal_occurrences = User.get_personal_occurences(ingredient)#history.search_ingredient(ingredient) #Number of occurrences of the meal during the past week in the history of the user
-        popularity_frequency = history.popularity_frequency(ingredient) #Frequence at which the 
-        return [self.ingredient_availability_score(nbr_of_days), self.personal_occurence_score(nbr_of_personal_occurrences, 1.5), self.popularity_score(popularity_frequency)]
+        availability_period = ingredient.get_local_availability_period(ingredient)
+        nbr_of_days = (availability_period[1]-availability_period[0]).days #Number of days of availability of the ingredient during the year
+        popularity_frequency = Ingredients.get_popularity_frequency(Ingredients,ingredient)#history.popularity_frequency(ingredient) #Frequence at which the 
+        return [self.ingredient_availability_score(nbr_of_days), self.popularity_score(popularity_frequency)] + self.personal_constraint_score(ingredient)
     
     def maj_weights(self, environnement, history, keyword_weights_pairs): #TODO
         return 1

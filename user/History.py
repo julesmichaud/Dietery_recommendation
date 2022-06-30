@@ -5,6 +5,7 @@ Created on 21 juin 2022
 '''
 
 from meal.meal import Meal
+from math import log2, abs
 
 class History() :
 
@@ -41,20 +42,20 @@ class History() :
         count = 0
 
         for i in range(1,15): #commencer � 1 pour prendre le repas d'indice -1, i.e. le dernier, finir � -15 pour le 14�me avant la fin
-            for elem in Meal.get_starter(self.get_meals()[-i]):
-                if elem == ingredient:
-                    count+=1
-            for elem in Meal.get_maincourse(self.get_meals()[-i]):
-                if elem == ingredient:
-                    count+=1
-            for elem in Meal.get_dessert(self.get_meals()[-i]):  
-
-                if elem == ingredient:
+            for alimentary_sequence in (self.get_meals)[-i]:
+                for elem in alimentary_sequence.get_ingredients:
+                    if elem.get_name() == ingredient.get_name() 
                     count+=1  
         return count            
     
     def quantity_by_type(self, type_index):            
         count = 0 
         for elem in Ingredients.get_type_from_index(type_index)
-            count+= search_ingredient(elem)
+            count+= self.search_ingredient(elem)
         return count
+    
+    def get_last_meal(self):
+        return self.get_meals[-1]
+    
+    
+    

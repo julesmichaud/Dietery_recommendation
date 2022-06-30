@@ -15,7 +15,7 @@ class Alimentary_sequence(object):
         '''
         Constructor
         '''
-        self.set_ingredients(ingredients)#A list of [ingredient, quantity], where quantity is the quantity of ingredient necessary to make the recipe
+        self.set_ingredients(ingredients)#A list of ingredient, where quantity is the quantity of ingredient necessary to make the recipe
         self.set_time(time)#The time necessary to make the recipe
     
     def __str__(self, *args, **kwargs):
