@@ -3,6 +3,9 @@ Created on 21 juin 2022
 
 @author: Jules Michaud
 '''
+from math import log2
+from user.History import History as history
+
 class User() :
 
     def __init__(self, history, constraints):
