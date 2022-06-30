@@ -31,7 +31,6 @@ class Meal_generator(object):
             ingredient = type[ingredient_index]
             explored_ingredient_indexes.append(ingredient_index)
             current_complexity = Kolmogorov.Kolmogorov.kolmogorov_ingredient(Kolmogorov.Kolmogorov, ingredient)#, History.History)
-            #current_complexity = ingredients.get_complexity(ingredients, ingredient)
             if(current_complexity<min_complexity):
                 min_complexity = current_complexity
                 least_complex_ingredient = ingredient
@@ -64,9 +63,9 @@ class Meal_generator(object):
     def select_neighbor(self,least_complex_list):
         ''' Returns the least complex ingredient out of all the ingredients of a list '''
         min_ingredient = least_complex_list[0]
-        min_complexity = ingredients.get_complexity(ingredients, min_ingredient)
+        min_complexity = Kolmogorov.Kolmogorov.kolmogorov_ingredient(self, min_ingredient)
         for ingredient in least_complex_list:
-            complexity = ingredients.get_complexity(ingredients, ingredient)
+            complexity = Kolmogorov.Kolmogorov.kolmogorov_ingredient(self, ingredient)
             if(complexity<min_complexity):
                 min_complexity = complexity
                 min_ingredient = ingredient
@@ -77,10 +76,8 @@ class Meal_generator(object):
         selected_ingredient = self.select_neighbor(self,self.select_neighbors(self,source_ingredient, k, n)) 
         return selected_ingredient
         
-    def generate_meal(self):
+    def generate_meal(self, ingredients):
         ''' Generates a brand new full meal '''
-        ingredients = ["salade","pave de saumon", "epinards", "yaourt"] #To initialize with the ingredients of the last meal from History
-        #ingredients = History.History.get_meals(History.History)[-1]
         time = 0
         for i in range(len(ingredients)):
             ingredients[i]=self.generate_ingredient(self,ingredients[i],2,2)

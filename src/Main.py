@@ -11,6 +11,7 @@ Created on 22 juin 2022
 from click._compat import raw_input
 from src import meal_generator
 from food.alimentary_sequence import Alimentary_sequence
+from user.User import User
 
 def is_back(user_in):
     ''' Checks if the user input said to go back a step in the program '''
@@ -61,10 +62,10 @@ def back_input_after_2():
     elif(user_in.__eq__("2")):
         number_of_menus = meal_arg_input()
         
-        origin_sequence = Alimentary_sequence(["salade","pave de saumon", "epinards", "yaourt"],0) #To initialize with the ingredients of the last meal from History
+        origin_sequence = User.get_last_meal(User)
         print("Generating " + str(number_of_menus) + " menu(s)...\n")
         for i in range(number_of_menus):
-            generated_sequence = meal_generator.Meal_generator.generate_meal(meal_generator.Meal_generator)
+            generated_sequence = meal_generator.Meal_generator.generate_meal(meal_generator.Meal_generator, origin_sequence.get_ingredients())
             meal_generator.Meal_generator.explain_meal(meal_generator.Meal_generator,origin_sequence.get_ingredients(), generated_sequence.get_ingredients())
             origin_sequence = generated_sequence
         print("Done ! Here you go ;)\n")
@@ -90,10 +91,10 @@ if __name__ == '__main__':
     elif(user_in.__eq__("2")):
         number_of_menus = meal_arg_input() #Also considers "back" and "quit"
         
-        origin_sequence = Alimentary_sequence(["salade","pave de saumon", "epinards", "yaourt"],0) #To initialize with the ingredients of the last meal from History
+        origin_sequence = User.get_last_meal(User)
         print("Generating " + str(number_of_menus) + " menu(s)...\n")
         for i in range(number_of_menus):
-            generated_sequence = meal_generator.Meal_generator.generate_meal(meal_generator.Meal_generator)
+            generated_sequence = meal_generator.Meal_generator.generate_meal(meal_generator.Meal_generator, origin_sequence.get_ingredients())
             meal_generator.Meal_generator.explain_meal(meal_generator.Meal_generator,origin_sequence.get_ingredients(), generated_sequence.get_ingredients())
             origin_sequence = generated_sequence
         print("Done ! Here you go ;)\n")
