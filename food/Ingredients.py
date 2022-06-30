@@ -25,9 +25,10 @@ class Ingredients(object):
                 new_lines.append(line.strip().split(';'))
             ingredients[i]=new_lines
         #self.ingredients_list = ingredients
-        for ingredient_param in ingredients:
-            ingredient = Ingredient(ingredient_param)
-            self.ingredients_list.append(ingredient)
+        for ingredient_type in ingredients:
+            for ingredient_param in ingredient_type:
+                ingredient = Ingredient(ingredient_param)
+                self.ingredients_list.append(ingredient)
         self.category_indexes_list = [[0],[1,2],[3,4],[5]]
         self.complexity_list = [[1.3,2.,1.4],[0.4,0.5,4.6,1.2],[0.39,0.35,0.8,1.8],[0.6,0.9,1.9],[0.7,2.3,3.1],[0.5,1.2]]
         
