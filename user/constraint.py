@@ -11,8 +11,10 @@ class Constraint(ABC) :
         '''
         Constructor
         '''
+
         self.ingredients_type_index = ingredients_type_index
         self.is_soft = is_soft
+
     
     def set_ingredients_type_index(self, ingredients_type_index):
         self.ingredients_type_index = ingredients_type_index
@@ -26,6 +28,7 @@ class Constraint(ABC) :
     def get_ingredients_is_soft(self):
         return self.is_soft
     
+
     def constraint_interest(self): #returns the constraint interest
         pass
     

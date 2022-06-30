@@ -4,8 +4,10 @@ Created on 21 juin 2022
 @author: Jules Michaud
 '''
 from math import log2
-import History
-from constraint import Constraint
+
+from user import History
+from user import Constraint
+
 
 class SoftConstraint(Constraint) :
 
