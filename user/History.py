@@ -5,6 +5,7 @@ Created on 21 juin 2022
 '''
 
 from meal.meal import Meal
+from math import log2, abs
 
 class History() :
 
@@ -56,5 +57,6 @@ class History() :
     def quantity_by_type(self, type_index):            
         count = 0 
         for elem in Ingredients.get_type_from_index(type_index)
-            count+= search_ingredient(elem)
+            count+= self.search_ingredient(elem)
         return count
+    
