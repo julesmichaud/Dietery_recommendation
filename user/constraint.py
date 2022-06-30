@@ -28,5 +28,5 @@ class Constraint(ABC) :
     
     @abstractmethod
     def constraint_interest(self): #returns the constraint interest
-        pass 
+        pass
     
