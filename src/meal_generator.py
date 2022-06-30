@@ -4,15 +4,17 @@ Created on 22 juin 2022
 @author: Aurelien Giroux
 '''
 from food.alimentary_sequence import Alimentary_sequence
-from food import Ingredients.Ingredients
+from food import Ingredients
 import random
 from kolmogorov import Kolmogorov
 from user import History
 
 class Meal_generator(object):
+    
     def __init__(self,user,ingredients):
         self.user = user
         self.ingredients = ingredients
+        self.detection_threshold = 4
         
     def smallest_out_of_two(self,nbr1, nbr2):
         ''' Returns the smallest number out of the two seized '''
@@ -102,7 +104,7 @@ class Meal_generator(object):
             generated_complixity_factors = Kolmogorov.Kolmogorov.explainable_kolmogorov_ingredient(Kolmogorov.Kolmogorov, generated_sequence[i][3], History.History)
             for j in range(len(original_complixity_factors)):
                 current_difference = generated_complixity_factors[j][3] - original_complixity_factors[j][3]
-                if(current_difference>2): #Change deemed significant regarding specific aspect
+                if(current_difference>self.detection_threshold): #Change deemed significant regarding specific aspect
                     if(j==0): #Surprise over availability period of the ingredient
                         print(""+ str(generated_sequence[i][3]) + " n'est disponible que " + Ingredients.Ingredients.get_availability_period(generated_sequence[i][3]) + "jours cette annee, et c'est pourquoi nous vous l'avons propose")
                     if(j==1): #Surprise over overall popularity of the ingredient
