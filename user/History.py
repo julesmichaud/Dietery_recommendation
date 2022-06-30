@@ -3,7 +3,10 @@ Created on 21 juin 2022
 
 @author: Jules Michaud
 '''
+
 from meal.meal import Meal
+from math import log2, abs
+
 class History() :
 
     def __init__(self, meals, appreciations):
@@ -37,7 +40,8 @@ class History() :
         
     def search_ingredient(self, ingredient):
         count = 0
-        for i in range(1,15): #commencer à 1 pour prendre le repas d'indice -1, i.e. le dernier, finir à -15 pour le 14ème avant la fin
+
+        for i in range(1,15): #commencer ï¿½ 1 pour prendre le repas d'indice -1, i.e. le dernier, finir ï¿½ -15 pour le 14ï¿½me avant la fin
             for elem in Meal.get_starter(self.get_meals()[-i]):
                 if elem == ingredient:
                     count+=1
@@ -45,8 +49,14 @@ class History() :
                 if elem == ingredient:
                     count+=1
             for elem in Meal.get_dessert(self.get_meals()[-i]):  
+
                 if elem == ingredient:
                     count+=1  
         return count            
-                
-            
+    
+    def quantity_by_type(self, type_index):            
+        count = 0 
+        for elem in Ingredients.get_type_from_index(type_index)
+            count+= self.search_ingredient(elem)
+        return count
+    

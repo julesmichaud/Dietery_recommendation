@@ -3,24 +3,30 @@ Created on 21 juin 2022
 
 @author: Jules Michaud
 '''
-class Constraint() :
+from abc import ABC
 
-    def __init__(self, importance, description):
+class Constraint(ABC) :
+
+    def __init__(self, ingredients_type_index, is_soft):
         '''
         Constructor
         '''
-        self.importance = importance
-        self.description = description
+        self.importance = set_ingredients_type_index(ingredients_type_index)
+        self.is_soft = set_is_soft(is_soft)
     
-    def set_importance(self, importance):
-        self.importance = importance
+    def set_ingredients_type_index(self, ingredients_type_index):
+        self.ingredients_type_index = ingredients_type_index
     
-    def set_description(self, description):
-        self.description = description
+    def set_is_soft(self, is_soft):
+        self.is_soft = is_soft
+
+    def get_ingredients_type_index(self):
+        return ingredients_type_index
     
-    def get_importance(self):
-        return self.importance
+    def get_ingredients_is_soft(self):
+        return ingredients_is_soft
     
-    def get_description(self):
-        return self.description
-     
+    @abstractmethod
+    def constraint_interest(self): #returns the constraint interest
+        pass 
+    

@@ -1,5 +1,3 @@
-'''
-Created on 22 juin 2022
 
 @author: Aurelien Giroux
 '''
@@ -10,19 +8,19 @@ from kolmogorov import Kolmogorov
 from user import History
 from random import random as rand
 from math import *
-
 ingredients = Ingredients.Ingredients
 
 class Meal_generator(object):
     
     def smallest_out_of_two(self,nbr1, nbr2):
+        ''' Returns the smallest number out of the two seized '''
         if(nbr1<nbr2):
             return nbr1
         return nbr2
     
     def explore_type(self,type, n): #type is a list of ingredients
+        ''' Returns the least complex ingredient out of all of those present in a type '''
         explored_ingredient_indexes = []
-        #least_complex_couple = [None,None]
         least_complex_ingredient = "Giberish"
         min_complexity = 9999999
         for i in range(n): #We explore n ingredients whithin each type
@@ -31,19 +29,17 @@ class Meal_generator(object):
                 ingredient_index = random.randint(0,len(type)-1)
             ingredient = type[ingredient_index]
             explored_ingredient_indexes.append(ingredient_index)
-            #current_complexity = Kolmogorov.Kolmogorov.kolmogorov_ingredient(Kolmogorov.Kolmogorov, ingredient, History.History)
-            current_complexity = ingredients.get_complexity(ingredients, ingredient)
+            current_complexity = Kolmogorov.Kolmogorov.kolmogorov_ingredient(Kolmogorov.Kolmogorov, ingredient)#, History.History)
+            #current_complexity = ingredients.get_complexity(ingredients, ingredient)
             if(current_complexity<min_complexity):
                 min_complexity = current_complexity
-                #least_complex_couple[0]=min_complexity
-                #least_complex_couple[1]=ingredient
                 least_complex_ingredient = ingredient
         return least_complex_ingredient
     
     def select_neighbors(self,ingredient, k, n):
+        ''' Returns the least complex ingredients present in each type of the category of the input ingredient '''
         category_indexes = ingredients.get_category_indexes(ingredients,ingredient) #We get the indexes of the category of the aliment
         type_index = ingredients.get_type_index(ingredients,ingredient) #We get the index of the type whithin the category
-        
         
         explored_category_indexes = [type_index]
         type = ingredients.get_type(ingredients,ingredient)
@@ -65,6 +61,7 @@ class Meal_generator(object):
         return least_complex_list
     
     def select_neighbor(self,least_complex_list):
+        ''' Returns the least complex ingredient out of all the ingredients of a list '''
         min_ingredient = least_complex_list[0]
         min_complexity = ingredients.get_complexity(ingredients, min_ingredient)
         for ingredient in least_complex_list:
@@ -75,10 +72,12 @@ class Meal_generator(object):
         return min_ingredient
     
     def generate_ingredient(self,source_ingredient, k, n):
+        ''' Based on a source ingredient, returns the least complex ingredient of its category '''
         selected_ingredient = self.select_neighbor(self,self.select_neighbors(self,source_ingredient, k, n)) 
         return selected_ingredient
         
     def generate_meal(self):
+        ''' Generates a brand new full meal '''
         ingredients = ["salade","pave de saumon", "epinards", "yaourt"] #To initialize with the ingredients of the last meal from History
         #ingredients = History.History.get_meals(History.History)[-1]
         time = 0
@@ -91,25 +90,31 @@ class Meal_generator(object):
         return sequence
     
     def explain_meal(self,origin_sequence, generated_sequence):
+        ''' Explains the choice of a meal (the generated_sequence), when compared to another (the origin_sequence) '''
         L1=["Comme vous avez semble-t-il beaucoup aime ","Puisque vous avez apprécie ","Vous avez l'air d'avoir aime "] #synonym list 1 not to produce sentences that are too "artificial" for users
         L2=[", nous vous l'avons repropose."," nous vous l'avons donc resuggere"," nous vous en proposons donc un peu plus dans votre assiette"," nous vous en proposons donc encore un petit peu"]
         p1,p2=rand(),rand() #This random floats are there to make us choose which synonym will be used in the following sentence
-        
         for i in range(len(origin_sequence)):
             #Before anything, get a hold of the intermediate values for the calculation of each of the meals' complexities, and compare them
             #We can get information by comparing the different factors of complexity, as well as with somewhat arbitrary thresholds for things like the rarity of a product
-            if(origin_sequence[i]==generated_sequence[i]):
-                p=rand() #choose a random float between 0 and 1
+            if(origin_sequence[i][3]==generated_sequence[i][3]):
+                p=rand() #choose a random float between 0 and 1 that make us choose one synonym or another
                 if p<=1/2:              
                     print(L1[ceil(3*p1)-1] + origin_sequence[i] + L2[ceil(4*p2)-1])
                 else:
                     print(origin_sequence[i]+" vous a apparemment convaincu, c'est pourquoi nous vous le proposons a nouveau")
             else:
-                print("Pour changer de " + origin_sequence[i] + ", nous vous avons propose plutot " + generated_sequence[i] + ".")
-            #original_complixity_factors = Kolmogorov.Kolmogorov.explainable_kolmogorov_ingredient(Kolmogorov.Kolmogorov, origin_sequence[i], History.History)
-           # generated_complixity_factors = Kolmogorov.Kolmogorov.explainable_kolmogorov_ingredient(Kolmogorov.Kolmogorov, generated_sequence[i], History.History)
-           # for j in range(len(original_complixity_factors)):
-               # current_difference = generated_complixity_factors[j] - original_complixity_factors[j]
-               # if(current_difference>2): #Change deemed significant regarding specific aspect
-                   # if(j==0): #Surprise sur la p�riode de disponibilit�
-                      #  print(""+ str(generated_sequence[i]) + " n'est disponible que " + ingredients.get_availability_period(generated_sequence[i]) + "jours cette ann�e")
+                print("Pour changer de " + origin_sequence[i][3] + ", nous vous avons propose plutot " + generated_sequence[i] + ".")
+            
+            original_complixity_factors = Kolmogorov.Kolmogorov.explainable_kolmogorov_ingredient(Kolmogorov.Kolmogorov, origin_sequence[i][3], History.History)
+            generated_complixity_factors = Kolmogorov.Kolmogorov.explainable_kolmogorov_ingredient(Kolmogorov.Kolmogorov, generated_sequence[i][3], History.History)
+            for j in range(len(original_complixity_factors)):
+                current_difference = generated_complixity_factors[j][3] - original_complixity_factors[j][3]
+                if(current_difference>2): #Change deemed significant regarding specific aspect
+                    if(j==0): #Surprise over availability period of the ingredient
+                        print(""+ str(generated_sequence[i][3]) + " n'est disponible que " + ingredients.get_availability_period(generated_sequence[i][3]) + "jours cette annee, et c'est pourquoi nous vous l'avons propose")
+                    if(j==1): #Surprise over overall popularity of the ingredient
+                        print("Pour vous surprendre au quotidien, nous avons souhaite vous proposer un aliment rarement present dans la diete des francais :" + str(generated_sequence[i][3]))
+                #if(current_difference<-2):
+            
+
