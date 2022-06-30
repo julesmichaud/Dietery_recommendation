@@ -13,7 +13,6 @@ class Ingredients(object):
         '''
         Constructor
         '''
-
         ingredients=[None,None,None,None,None]
         str_ingredients=['starters','accompaniments','meats','fishes','desserts']
         for i in range (5):
@@ -35,10 +34,8 @@ class Ingredients(object):
     total_meals=256301
     
     def get_type(self,target_ingredient):
-
-        for type in self.ingredients_list:
         ''' Returns the type of an ingredient given in parameter '''
-
+        for type in self.ingredients_list:
             for ingredient in type:
                 if(ingredient == target_ingredient):
                     return type
@@ -46,43 +43,40 @@ class Ingredients(object):
         return None
     
     def get_type_from_index(self,type_index):
-
-        return self.ingredients_list[type_index]
         ''' Returns the type of the ingredient, given its index in the ingredients_list '''
+        return self.ingredients_list[type_index]
 
     
     def get_type_index(self, target_ingredient):
-
+        ''' Returns the index in the ingredients_list of the type of an ingredient given in parameter '''
         for i in range(len(self.ingredients_list)):
             for j in range(len(self.ingredients_list[i])):
                 if(self.ingredients_list[i][j] == target_ingredient):
-        ''' Returns the index in the ingredients_list of the type of an ingredient given in parameter '''
-
                     return i
         print("No such ingredient")
         return None
     
     def get_category_indexes(self,target_ingredient):
-
+        ''' Returns the indexes in the ingredients_list of the types corresponding to the category of the ingredient given in the parameters '''
         type_index = self.get_type_index(self,target_ingredient)
         for category_indexes in self.category_indexes_list:
-        ''' Returns the indexes in the ingredients_list of the types corresponding to the category of the ingredient given in the parameters '''
-
             if type_index in category_indexes:
                 return category_indexes
         return None
     
     def get_information_ingredient(self,target_ingredient):
-        '''return list with all information about target_ingredient'''
+        '''Returns a list with all the information about target_ingredient'''
         for plate in self.ingredients:
             for ingredient in plate:
-                if target_ingredient=ingredient[3]:
+                if (target_ingredient==ingredient[3]):
                     return ingredient
                 
     def get_average_consumption(self,ingredient):
+        '''11000 approximately corresponds to the number of participants included in the inca3 study'''
         return ingredient.get_average_consumption(ingredient)
     
     def get_popularity_frequency(self,ingredient):
+        '''256301 corresponds to the number of ingredients eaten during the inca3 study'''
         return ingredient.get_popularity_frequency(ingredient)
     
     

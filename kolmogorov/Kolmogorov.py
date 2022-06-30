@@ -20,6 +20,10 @@ class Kolmogorov(object):
         '''
         Constructor
         '''
+        self.ingredient_availability_coef = 1
+        self.personal_occurence_coef = 1
+        self.popularity_coef = 1
+        self.normalization_kolmogorov_alimentary_sequence = 1
         
     def ingredient_availability_score(self, nbr_of_days):
         ''' Returns the component of the simplicity linked to the availability of an ingredient : the less it appears frequently, the more simple it becomes '''
@@ -75,7 +79,7 @@ class Kolmogorov(object):
             return [User.constraints_complexity(User,4), excentricity_complexity]
         return None
     
-    def explainable_kolmogorov_ingredient(self, ingredient)
+    def explainable_kolmogorov_ingredient(self, ingredient):
         ''' Returns the list of the simplicity score components for an ingredient '''
         availability_period = ingredient.get_local_availability_period(ingredient)
         nbr_of_days = (availability_period[1]-availability_period[0]).days #Number of days of availability of the ingredient during the year
