@@ -37,3 +37,10 @@ class User() :
     
     def excentricity_complexity(self, expectation, ingredient): #returns the complexity due to the excentricity of the actual alimentation of the user
         return  log2(28/(1+abs(history.search_ingredient(ingredient)-expectation)))
+    
+    def get_last_user_meal(self):
+        return history.get_last_meal()
+    
+    def store_user_meal(self,meal):
+        history.add_meal(meal)
+    
