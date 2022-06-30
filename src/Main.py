@@ -9,7 +9,7 @@ Created on 22 juin 2022
 #    - If it wants to generate menus, ask how many the user wants
 # - After being done with a menu, always redirect to the previous menu. Always offer a "go back" option
 from click._compat import raw_input
-import meal_generator
+from src import meal_generator
 from food.alimentary_sequence import Alimentary_sequence
 from user.User import User
 from food.Ingredient import Ingredient
@@ -41,7 +41,7 @@ def initialisation():
     #for meal in to_init_list:
     #    User.store_user_meal(User,meal)
         
-    user = User(to_init_list, [])
+    user = User(to_init_list, [4, True])
     return user
 
 def is_back(user_in):

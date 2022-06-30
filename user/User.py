@@ -13,8 +13,10 @@ class User() :
         '''
         Constructor
         '''
+        ingredient_type_index = constraints [0]
+        is_soft = constraints[1]
         self.history = History(history)
-        self.constraints = Constraint(constraints) #a list of constraint
+        self.constraints = Constraint(ingredient_type_index,is_soft) #a list of constraint
     
     def set_history(self, history):
         self.history = history
@@ -33,17 +35,17 @@ class User() :
         for constraint in self.constraints:
             if constraint.get_ingredients_type_index()==ingredients_type_index:
                 if constraint.get_is_soft():
-                    n=history.quantity_by_type(ingredients_type_index)
+                    n=self.history.quantity_by_type(ingredients_type_index)
                     complexity+=constraint.constraint_interest(n)
                 else:
                     complexity += constraint.constraint_interest()
         return complexity
     
     def excentricity_complexity(self, expectation, ingredient): #returns the complexity due to the excentricity of the actual alimentation of the user
-        return  log2(28/(1+abs(history.search_ingredient(ingredient)-expectation)))
+        return  log2(28/(1+abs(self.history.search_ingredient(ingredient)-expectation)))
     
     def get_last_user_meal(self):
-        return history.get_last_meal()
+        return self.history.get_last_meal()
     
     def store_user_meal(self,meal):
         history.add_meal(history,meal)
