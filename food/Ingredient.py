@@ -64,6 +64,8 @@ class Ingredient(object):
     #
     # def set_local_availability_period(self, local_availability_period):
     #     self.local_availability_period = local_availability_period
+    
+    
 
     def __eq__(self, other):
         return (self.get_name() == other.get_name()) and (self.get_nature() == other.get_nature()) and (self.get_calories_per_hundred_grams() == other.get_calories_per_hundred_grams()) and (self.get_carbon_emissions_per_hundred_grams() == other.get_carbon_emissions_per_hundred_grams()) and (self.get_local_availability_period() == other.get_local_availability_period())
