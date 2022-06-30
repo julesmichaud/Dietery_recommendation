@@ -73,11 +73,11 @@ class Ingredients(object):
                 
     def get_average_consumption(self,ingredient):
         '''11000 approximately corresponds to the number of participants included in the inca3 study'''
-        return int(ingredient[-1])/11000
+        return ingredient.get_average_consumption(ingredient)
     
     def get_popularity_frequency(self,ingredient):
         '''256301 corresponds to the number of ingredients eaten during the inca3 study'''
-        return int(ingredient[-1])/256301
+        return ingredient.get_popularity_frequency(ingredient)
     
     
     # def get_complexity(self, target_ingredient):
