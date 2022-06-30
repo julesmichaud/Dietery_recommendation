@@ -30,12 +30,10 @@ class Meal_generator(object):
                 ingredient_index = random.randint(0,len(type)-1)
             ingredient = type[ingredient_index]
             explored_ingredient_indexes.append(ingredient_index)
-            #current_complexity = Kolmogorov.Kolmogorov.kolmogorov_ingredient(Kolmogorov.Kolmogorov, ingredient, History.History)
-            current_complexity = ingredients.get_complexity(ingredients, ingredient)
+            current_complexity = Kolmogorov.Kolmogorov.kolmogorov_ingredient(Kolmogorov.Kolmogorov, ingredient)#, History.History)
+            #current_complexity = ingredients.get_complexity(ingredients, ingredient)
             if(current_complexity<min_complexity):
                 min_complexity = current_complexity
-                #least_complex_couple[0]=min_complexity
-                #least_complex_couple[1]=ingredient
                 least_complex_ingredient = ingredient
         return least_complex_ingredient
     
@@ -43,7 +41,6 @@ class Meal_generator(object):
         ''' Returns the least complex ingredients present in each type of the category of the input ingredient '''
         category_indexes = ingredients.get_category_indexes(ingredients,ingredient) #We get the indexes of the category of the aliment
         type_index = ingredients.get_type_index(ingredients,ingredient) #We get the index of the type whithin the category
-        
         
         explored_category_indexes = [type_index]
         type = ingredients.get_type(ingredients,ingredient)
@@ -98,19 +95,19 @@ class Meal_generator(object):
         for i in range(len(origin_sequence)):
             #Before anything, get a hold of the intermediate values for the calculation of each of the meals' complexities, and compare them
             #We can get information by comparing the different factors of complexity, as well as with somewhat arbitrary thresholds for things like the rarity of a product
-            if(origin_sequence[i]==generated_sequence[i]):
-                print("Comme vous avez semble beaucoup aimer " + origin_sequence[i] + ", nous vous l'avons repropose.")
+            if(origin_sequence[i][3]==generated_sequence[i][3]):
+                print("Comme vous avez semble beaucoup aimer " + origin_sequence[i][3] + ", nous vous l'avons repropose.")
             else:
-                print("Pour changer de " + origin_sequence[i] + ", nous vous avons propose plutot " + generated_sequence[i] + ".")
+                print("Pour changer de " + origin_sequence[i][3] + ", nous vous avons propose plutot " + generated_sequence[i] + ".")
             
-            original_complixity_factors = Kolmogorov.Kolmogorov.explainable_kolmogorov_ingredient(Kolmogorov.Kolmogorov, origin_sequence[i], History.History)
-            generated_complixity_factors = Kolmogorov.Kolmogorov.explainable_kolmogorov_ingredient(Kolmogorov.Kolmogorov, generated_sequence[i], History.History)
+            original_complixity_factors = Kolmogorov.Kolmogorov.explainable_kolmogorov_ingredient(Kolmogorov.Kolmogorov, origin_sequence[i][3], History.History)
+            generated_complixity_factors = Kolmogorov.Kolmogorov.explainable_kolmogorov_ingredient(Kolmogorov.Kolmogorov, generated_sequence[i][3], History.History)
             for j in range(len(original_complixity_factors)):
-                current_difference = generated_complixity_factors[j] - original_complixity_factors[j]
+                current_difference = generated_complixity_factors[j][3] - original_complixity_factors[j][3]
                 if(current_difference>2): #Change deemed significant regarding specific aspect
                     if(j==0): #Surprise over availability period of the ingredient
-                        print(""+ str(generated_sequence[i]) + " n'est disponible que " + ingredients.get_availability_period(generated_sequence[i]) + "jours cette annee, et c'est pourquoi nous vous l'avons propose")
-                    if(j==2): #Surprise over overall popularity of the ingredient
-                        print("Pour vous surprendre au quotidien, nous avons souhaite vous proposer un aliment rarement present dans la diete des francais :" + str(generated_sequence[i]))
+                        print(""+ str(generated_sequence[i][3]) + " n'est disponible que " + ingredients.get_availability_period(generated_sequence[i][3]) + "jours cette annee, et c'est pourquoi nous vous l'avons propose")
+                    if(j==1): #Surprise over overall popularity of the ingredient
+                        print("Pour vous surprendre au quotidien, nous avons souhaite vous proposer un aliment rarement present dans la diete des francais :" + str(generated_sequence[i][3]))
                 #if(current_difference<-2):
             
