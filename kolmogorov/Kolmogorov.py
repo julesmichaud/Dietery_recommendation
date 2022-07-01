@@ -40,11 +40,12 @@ class Kolmogorov(object):
         type_index = ingredients.get_type_index(ingredient)
         expectation = ingredients.get_average_consumption(ingredient)
         excentricity_complexity = user.excentricity_complexity(expectation, ingredient)
+        print(excentricity_complexity)
         if(type_index == 3):
             return user.constraints_complexity(3) + excentricity_complexity
         elif(type_index == 4):
             return user.constraints_complexity(4) + excentricity_complexity
-        return None
+        return excentricity_complexity
     
         #return log2(timespan/(1+abs(x-mean)))
         #If a person eats like a typical French person, its description is simple (we just say he eats like a typical french person), : max simplicity of log2(timespan)
@@ -60,7 +61,10 @@ class Kolmogorov(object):
         #nbr_of_days = (availability_period[1]-availability_period[0]).days #Number of days of availability of the ingredient during the year
         nbr_of_days = availability_period
         popularity_frequency = Ingredients.get_popularity_frequency(Ingredients,ingredient)#history.popularity_frequency(ingredient) #Frequence at which the 
-        return self.ingredient_availability_score(self,nbr_of_days) + self.popularity_score(self,popularity_frequency) - self.personal_constraint_score(self,user,ingredients,ingredient)
+        #print("ingredient_availability_score=" + str(self.ingredient_availability_score(self,nbr_of_days)))
+        #print("popularity_score = " + str(self.popularity_score(self,popularity_frequency)))
+        #print("personal_constraint_score = " + str(self.personal_constraint_score(self,user,ingredients,ingredient)))
+        return Kolmogorov.ingredient_availability_score(self,nbr_of_days) + Kolmogorov.popularity_score(self,popularity_frequency) - Kolmogorov.personal_constraint_score(self,user,ingredients,ingredient)
         #global_score = surprise_score - constraint_malus
         
     def kolmogorov_sequence(self, sequence):
@@ -79,7 +83,7 @@ class Kolmogorov(object):
             return [User.constraints_complexity(User,3), excentricity_complexity]
         elif(type_index == 4):
             return [User.constraints_complexity(User,4), excentricity_complexity]
-        return None
+        return excentricity_complexity
     
     def explainable_kolmogorov_ingredient(self, ingredient):
         ''' Returns the list of the simplicity score components for an ingredient '''

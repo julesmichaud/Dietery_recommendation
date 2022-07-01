@@ -42,6 +42,7 @@ class User() :
                     complexity+=constraint.constraint_interest(n)
                 else:
                     complexity += constraint.constraint_interest()
+        print("Complexity = " + str(complexity))
         return complexity
     
     def excentricity_complexity(self, expectation, ingredient): #returns the complexity due to the excentricity of the actual alimentation of the user

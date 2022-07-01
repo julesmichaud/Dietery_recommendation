@@ -1,7 +1,7 @@
 '''
 Created on 25 juin 2022
 
-@author: Aurelien Giroux
+@authors: Aurelien Giroux, Clement Dardare
 '''
 from food.Ingredient import Ingredient
 
