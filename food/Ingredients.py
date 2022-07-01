@@ -4,6 +4,7 @@ Created on 25 juin 2022
 @authors: Aurelien Giroux, Clement Dardare
 '''
 from food.Ingredient import Ingredient
+import random
 
 class Ingredients(object):
     '''
@@ -42,8 +43,11 @@ class Ingredients(object):
     
     def get_type(self,target_ingredient):
         ''' Returns the type of an ingredient given in parameter '''
+        print("In get_type")
+        print("Asking for : " + str(target_ingredient))
         for type in self.ingredients_list:
             for ingredient in type:
+                print(ingredient)
                 if(ingredient == target_ingredient):
                     return type
         print("No such ingredient")
@@ -56,9 +60,12 @@ class Ingredients(object):
     
     def get_type_index(self, target_ingredient):
         ''' Returns the index in the ingredients_list of the type of an ingredient given in parameter '''
+        print("In get_type_index")
+        print("Asking for : " + str(target_ingredient))
         for i in range(len(self.ingredients_list)):
             for j in range(len(self.ingredients_list[i])):
                 if(self.ingredients_list[i][j] == target_ingredient):
+                    print(str(self.ingredients_list[i][j]) + " is equal to " + str(target_ingredient))
                     return i
         print("No such ingredient")
         return None
@@ -75,7 +82,7 @@ class Ingredients(object):
         '''Returns a list with all the information about target_ingredient'''
         for plate in self.ingredients:
             for ingredient in plate:
-                if (target_ingredient==ingredient[3]):
+                if (target_ingredient==ingredient):
                     return ingredient
                 
     def get_average_consumption(self,ingredient):
@@ -87,7 +94,7 @@ class Ingredients(object):
         return ingredient.get_popularity_frequency()
     
     def get_availability_period(self, ingredient):
-        return 30
+        return 30 + random.randint(0,300)
     
     # def get_complexity(self, target_ingredient):
     #     ''' Returns the complexity of an ingredient given in parameter '''
