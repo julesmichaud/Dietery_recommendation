@@ -3,7 +3,7 @@ Created on 20 juin 2022
 
 @author: Aurelien Giroux
 '''
-
+import random
 
 class Ingredient(object):
     '''
@@ -26,7 +26,7 @@ class Ingredient(object):
         # An integer giving the amount of CO2 emitted by the production of 100g of said aliment
         self.carbon_emissions_per_hundred_grams=1
         # A list of 2 dates giving the approximate period of local availability of the ingredient (used to decide whether it is in season or not)
-        self.local_availability_period=1
+        self.local_availability_period=random.randint(1,300)
 
     def get_name(self):
         return self.name
