@@ -31,12 +31,12 @@ class History() :
         
     def search_ingredient(self, ingredient):
         count = 0
-
         for i in range(1,15): #commencer � 1 pour prendre le repas d'indice -1, i.e. le dernier, finir � -15 pour le 14�me avant la fin
-            for alimentary_sequence in (self.get_meals()[-i]):
-                for elem in alimentary_sequence.get_ingredients:
-                    if Ingredient.get_name(elem) == Ingredient.get_name(ingredient): 
-                        count+=1  
+            for j in range(len(self.get_meals()[-i])):
+                alimentary_sequence = self.get_meals()[-i][j]
+                for elem in alimentary_sequence.get_ingredients():
+                    if elem.get_name() == ingredient.get_name():
+                        count+=1 
         return count            
     
     def quantity_by_type(self, type_index):            

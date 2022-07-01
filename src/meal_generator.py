@@ -39,7 +39,7 @@ class Meal_generator(object):
                 ingredient_index = random.randint(0,len(type)-1)
             ingredient = type[ingredient_index]
             explored_ingredient_indexes.append(ingredient_index)
-            current_complexity = Kolmogorov.Kolmogorov.kolmogorov_ingredient(Kolmogorov.Kolmogorov, ingredient)#, History.History)
+            current_complexity = Kolmogorov.Kolmogorov.kolmogorov_ingredient(Kolmogorov.Kolmogorov, self.user, self.ingredients, ingredient)#, History.History)
             if(current_complexity<min_complexity):
                 min_complexity = current_complexity
                 least_complex_ingredient = ingredient
@@ -55,8 +55,8 @@ class Meal_generator(object):
         explored_category_indexes = [type_index]
         #type = Ingredients.Ingredients.get_type(self.ingredients,ingredient)
         type = self.ingredients.get_type(ingredient)
-        n_type = self.smallest_out_of_two(self,n, len(type))
-        least_complex_list = [self.explore_type(self,type,n_type)]
+        n_type = self.smallest_out_of_two(n, len(type))
+        least_complex_list = [self.explore_type(type,n_type)]
         
         k = self.smallest_out_of_two(self,k, len(category_indexes))
         

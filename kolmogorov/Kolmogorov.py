@@ -27,23 +27,23 @@ class Kolmogorov(object):
         
     def ingredient_availability_score(self, nbr_of_days):
         ''' Returns the component of the simplicity linked to the availability of an ingredient : the less it appears frequently, the more simple it becomes '''
-        return log2(365/nbr_of_days)/coefs.Coefficients.ingredient_availability_coef #ici on peut mettre ce coef à 1 et pondérer les autres relativement
+        return log2(365/nbr_of_days)#/self.ingredient_availability_coef #ici on peut mettre ce coef à 1 et pondérer les autres relativement
     
     def popularity_score(self, popularity_frequency):
         ''' Returns the component of the simplicity linked to the popularity of the aliment in the French population '''
         foc = popularity_frequency
-        return log2(1/foc)/coefs.Coefficients.popularity_coef
+        return log2(1/foc)#/self.popularity_coef
         #The more the ingredient is used in the French diet, the more complex it becomes, so the simplicity score decreases
     
-    def personal_constraint_score(self, ingredient):
+    def personal_constraint_score(self, user, ingredients, ingredient):
         ''' Returns the component of the simplicity linked to the difference between the user's diet and a typical french person's diet '''
-        type_index = Ingredients.get_type_index(self, ingredient)
-        expectation = Ingredients.get_average_consumption(ingredient)
-        excentricity_complexity = User.excentricity_complexity(User, expectation, ingredient)
+        type_index = ingredients.get_type_index(ingredient)
+        expectation = ingredients.get_average_consumption(ingredient)
+        excentricity_complexity = user.excentricity_complexity(expectation, ingredient)
         if(type_index == 3):
-            return User.constraints_complexity(User,3) + excentricity_complexity
+            return user.constraints_complexity(3) + excentricity_complexity
         elif(type_index == 4):
-            return User.constraints_complexity(User,4) + excentricity_complexity
+            return user.constraints_complexity(4) + excentricity_complexity
         return None
     
         #return log2(timespan/(1+abs(x-mean)))
@@ -54,12 +54,13 @@ class Kolmogorov(object):
     #    ''' Returns the health score '''
     #THIS FUNCTION IS ALREADY REALIZED BY THE PREVIOUS FUNCTION
     
-    def kolmogorov_ingredient(self, ingredient): #Criteria : in season / physical distance to supermarket / nature of the ingredient
+    def kolmogorov_ingredient(self, user, ingredients, ingredient): #Criteria : in season / physical distance to supermarket / nature of the ingredient
         ''' Returns the aggregated simplicity score of the ingredient '''
-        availability_period = ingredient.get_local_availability_period(ingredient)
-        nbr_of_days = (availability_period[1]-availability_period[0]).days #Number of days of availability of the ingredient during the year
+        availability_period = ingredient.get_local_availability_period()
+        #nbr_of_days = (availability_period[1]-availability_period[0]).days #Number of days of availability of the ingredient during the year
+        nbr_of_days = availability_period
         popularity_frequency = Ingredients.get_popularity_frequency(Ingredients,ingredient)#history.popularity_frequency(ingredient) #Frequence at which the 
-        return self.ingredient_availability_score(nbr_of_days) + self.popularity_score(popularity_frequency) - self.personal_constraint_score(ingredient)
+        return self.ingredient_availability_score(self,nbr_of_days) + self.popularity_score(self,popularity_frequency) - self.personal_constraint_score(self,user,ingredients,ingredient)
         #global_score = surprise_score - constraint_malus
         
     def kolmogorov_sequence(self, sequence):
