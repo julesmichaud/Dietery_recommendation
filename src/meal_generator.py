@@ -68,8 +68,8 @@ class Meal_generator(object):
             explored_category_indexes.append(type_index)
             #type = Ingredients.Ingredients.get_type_from_index(self.ingredients,type_index)
             type = self.ingredients.get_type_from_index(type_index)
-            n_type = self.smallest_out_of_two(self,n, len(type))
-            least_complex_list.append(self.explore_type(self,type,n_type))
+            n_type = self.smallest_out_of_two(n, len(type))
+            least_complex_list.append(self.explore_type(type,n_type))
             
         return least_complex_list
     
@@ -105,20 +105,20 @@ class Meal_generator(object):
         for i in range(len(origin_sequence)):
             #Before anything, get a hold of the intermediate values for the calculation of each of the meals' complexities, and compare them
             #We can get information by comparing the different factors of complexity, as well as with somewhat arbitrary thresholds for things like the rarity of a product
-            if(origin_sequence[i][2]==generated_sequence[i][2]):
-                print("Comme vous avez semble beaucoup aimer " + origin_sequence[i][2] + ", nous vous l'avons repropose.")
+            if(origin_sequence[i]==generated_sequence[i]):
+                print("Comme vous avez semble beaucoup aimer " + str(origin_sequence[i]) + ", nous vous l'avons repropose.")
             else:
-                print("Pour changer de " + origin_sequence[i][2] + ", nous vous avons propose plutot " + generated_sequence[i][2] + ".")
+                print("Pour changer de " + str(origin_sequence[i]) + ", nous vous avons propose plutot " + str(generated_sequence[i]) + ".")
             
-            original_complixity_factors = Kolmogorov.Kolmogorov.explainable_kolmogorov_ingredient(Kolmogorov.Kolmogorov, origin_sequence[i][2], History.History)
-            generated_complixity_factors = Kolmogorov.Kolmogorov.explainable_kolmogorov_ingredient(Kolmogorov.Kolmogorov, generated_sequence[i][2], History.History)
+            original_complixity_factors = Kolmogorov.Kolmogorov.explainable_kolmogorov_ingredient(Kolmogorov.Kolmogorov, self.user, self.ingredients,origin_sequence[i])#, History.History)
+            generated_complixity_factors = Kolmogorov.Kolmogorov.explainable_kolmogorov_ingredient(Kolmogorov.Kolmogorov, self.user, self.ingredients, generated_sequence[i])#, History.History)
             for j in range(len(original_complixity_factors)):
-                current_difference = generated_complixity_factors[j][2] - original_complixity_factors[j][2]
+                current_difference = generated_complixity_factors[j] - original_complixity_factors[j]
                 if(current_difference>self.detection_threshold): #Change deemed significant regarding specific aspect
                     if(j==0): #Surprise over availability period of the ingredient
                         #print(""+ str(generated_sequence[i][3]) + " n'est disponible que " + Ingredients.Ingredients.get_availability_period(ingredients,generated_sequence[i][3]) + "jours cette annee, et c'est pourquoi nous vous l'avons propose")
-                        print(""+ str(generated_sequence[i][2]) + " n'est disponible que " + self.ingredients.get_availability_period(generated_sequence[i][2]) + "jours cette annee, et c'est pourquoi nous vous l'avons propose")
+                        print(""+ str(generated_sequence[i]) + " n'est disponible que " + self.ingredients.get_availability_period(generated_sequence[i]) + "jours cette annee, et c'est pourquoi nous vous l'avons propose")
                     if(j==1): #Surprise over overall popularity of the ingredient
-                        print("Pour vous surprendre au quotidien, nous avons souhaite vous proposer un aliment rarement present dans la diete des francais :" + str(generated_sequence[i][3]))
+                        print("Pour vous surprendre au quotidien, nous avons souhaite vous proposer un aliment rarement present dans la diete des francais :" + str(generated_sequence[i]))
                 #if(current_difference<-2):
             

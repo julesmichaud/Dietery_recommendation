@@ -43,8 +43,8 @@ class Ingredients(object):
     
     def get_type(self,target_ingredient):
         ''' Returns the type of an ingredient given in parameter '''
-        print("In get_type")
-        print("Asking for : " + str(target_ingredient))
+        #print("In get_type")
+        #print("Asking for : " + str(target_ingredient))
         for type in self.ingredients_list:
             for ingredient in type:
                 print(ingredient)
@@ -60,12 +60,12 @@ class Ingredients(object):
     
     def get_type_index(self, target_ingredient):
         ''' Returns the index in the ingredients_list of the type of an ingredient given in parameter '''
-        print("In get_type_index")
-        print("Asking for : " + str(target_ingredient))
+        #print("In get_type_index")
+        #print("Asking for : " + str(target_ingredient))
         for i in range(len(self.ingredients_list)):
             for j in range(len(self.ingredients_list[i])):
                 if(self.ingredients_list[i][j] == target_ingredient):
-                    print(str(self.ingredients_list[i][j]) + " is equal to " + str(target_ingredient))
+                    #print(str(self.ingredients_list[i][j]) + " is equal to " + str(target_ingredient))
                     return i
         print("No such ingredient")
         return None
