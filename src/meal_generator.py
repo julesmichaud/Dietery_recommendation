@@ -20,7 +20,7 @@ class Meal_generator(object):
         '''
         self.user = user
         self.ingredients = ingredients
-        self.detection_threshold = 3
+        self.detection_threshold = 1
         
     def smallest_out_of_two(self,nbr1, nbr2):
         ''' Returns the smallest number out of the two seized '''
@@ -106,6 +106,7 @@ class Meal_generator(object):
             #Before anything, get a hold of the intermediate values for the calculation of each of the meals' complexities, and compare them
             #We can get information by comparing the different factors of complexity, as well as with somewhat arbitrary thresholds for things like the rarity of a product
             if(origin_sequence[i]==generated_sequence[i]):
+                print(str(origin_sequence[i]) + " = " + str(generated_sequence[i]))
                 print("Comme vous avez semble beaucoup aimer " + str(origin_sequence[i]) + ", nous vous l'avons repropose.")
             else:
                 print("Pour changer de " + str(origin_sequence[i]) + ", nous vous avons propose plutot " + str(generated_sequence[i]) + ".")

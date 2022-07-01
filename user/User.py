@@ -6,6 +6,7 @@ Created on 21 juin 2022
 from math import log2
 from user.History import History
 from user.constraint import Constraint
+import random
 
 class User() :
     '''
@@ -42,7 +43,7 @@ class User() :
                     complexity+=constraint.constraint_interest()
                 else:
                     complexity += constraint.constraint_interest()
-        print("Complexity = " + str(complexity))
+        complexity = random.randint(0,300)
         return complexity
     
     def excentricity_complexity(self, expectation, ingredient): #returns the complexity due to the excentricity of the actual alimentation of the user

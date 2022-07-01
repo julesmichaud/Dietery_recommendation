@@ -47,7 +47,7 @@ class Ingredients(object):
         #print("Asking for : " + str(target_ingredient))
         for type in self.ingredients_list:
             for ingredient in type:
-                print(ingredient)
+                #print(ingredient)
                 if(ingredient == target_ingredient):
                     return type
         print("No such ingredient")

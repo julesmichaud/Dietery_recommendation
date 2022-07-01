@@ -40,7 +40,7 @@ class Kolmogorov(object):
         type_index = ingredients.get_type_index(ingredient)
         expectation = ingredients.get_average_consumption(ingredient)
         excentricity_complexity = user.excentricity_complexity(expectation, ingredient)
-        print(excentricity_complexity)
+        #print(excentricity_complexity)
         if(type_index == 3):
             return user.constraints_complexity(ingredients,3) + excentricity_complexity
         elif(type_index == 4):

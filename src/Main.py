@@ -132,8 +132,8 @@ if __name__ == '__main__':
         origin_sequence = user.get_last_user_meal()
         print("Generating " + str(number_of_menus) + " menu(s)...\n")
         for i in range(number_of_menus):
-            generated_sequence = meal_generator.Meal_generator.generate_meal(generator, origin_sequence.get_ingredients())
-            meal_generator.Meal_generator.explain_meal(generator,origin_sequence.get_ingredients(), generated_sequence.get_ingredients())
+            generated_sequence = generator.generate_meal(origin_sequence.get_ingredients())
+            generator.explain_meal(origin_sequence.get_ingredients(), generated_sequence.get_ingredients())
             origin_sequence = generated_sequence
             #User.store_user_meal(user, generated_sequence)
             user.store_user_meal(generated_sequence)
