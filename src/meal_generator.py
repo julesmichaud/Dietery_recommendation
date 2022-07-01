@@ -86,14 +86,14 @@ class Meal_generator(object):
     
     def generate_ingredient(self,source_ingredient, k, n):
         ''' Based on a source ingredient, returns the least complex ingredient of its category '''
-        selected_ingredient = self.select_neighbor(self,self.select_neighbors(self,source_ingredient, k, n)) 
+        selected_ingredient = self.select_neighbor(self.select_neighbors(source_ingredient, k, n)) 
         return selected_ingredient
         
     def generate_meal(self, ingredients):
         ''' Generates a brand new full meal '''
         time = 0
         for i in range(len(ingredients)):
-            ingredients[i]=self.generate_ingredient(self,ingredients[i],2,2)
+            ingredients[i]=self.generate_ingredient(ingredients[i],2,2)
         sequence = Alimentary_sequence(ingredients, time)
         print("\n")
         print(sequence)

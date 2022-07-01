@@ -22,13 +22,17 @@ class Ingredients(object):
             file.close()
             new_lines=[]
             for line in lines:
-                new_lines.append(line.strip().split(';'))
+                a_line = line.strip().split(';')
+                a_line.pop(-1)
+                new_lines.append(a_line)
             ingredients[i]=new_lines
         #self.ingredients_list = ingredients
+        local_ingredients_list = []
         for ingredient_type in ingredients:
             for ingredient_param in ingredient_type:
                 ingredient = Ingredient(ingredient_param)
-                self.ingredients_list.append(ingredient)
+                local_ingredients_list.append(ingredient)
+        self.ingredients_list = local_ingredients_list
         self.category_indexes_list = [[0],[1,2],[3,4],[5]]
         #self.complexity_list = [[1.3,2.,1.4],[0.4,0.5,4.6,1.2],[0.39,0.35,0.8,1.8],[0.6,0.9,1.9],[0.7,2.3,3.1],[0.5,1.2]]
         self.availability_period = 30
@@ -60,7 +64,7 @@ class Ingredients(object):
     
     def get_category_indexes(self,target_ingredient):
         ''' Returns the indexes in the ingredients_list of the types corresponding to the category of the ingredient given in the parameters '''
-        type_index = self.get_type_index(self,target_ingredient)
+        type_index = self.get_type_index(target_ingredient)
         for category_indexes in self.category_indexes_list:
             if type_index in category_indexes:
                 return category_indexes
@@ -83,7 +87,6 @@ class Ingredients(object):
     
     def get_availability_period(self, ingredient):
         return 30
-    
     
     # def get_complexity(self, target_ingredient):
     #     ''' Returns the complexity of an ingredient given in parameter '''
