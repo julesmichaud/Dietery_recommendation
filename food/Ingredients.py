@@ -37,7 +37,7 @@ class Ingredients(object):
         
         self.ingredients_list = ingredients
         self.category_indexes_list = [[0],[1],[2,3],[4]]
-        self.availability_period = 30
+        #self.availability_period = 30 + random.randint(0,300)
         
     total_meals=256301
     
@@ -94,7 +94,7 @@ class Ingredients(object):
         return ingredient.get_popularity_frequency()
     
     def get_availability_period(self, ingredient):
-        return 30 + random.randint(0,300)
+        return ingredient.get_local_availability_period()
     
     # def get_complexity(self, target_ingredient):
     #     ''' Returns the complexity of an ingredient given in parameter '''

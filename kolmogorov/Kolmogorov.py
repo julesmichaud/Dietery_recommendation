@@ -89,7 +89,7 @@ class Kolmogorov(object):
         ''' Returns the list of the simplicity score components for an ingredient '''
         availability_period = ingredient.get_local_availability_period()
         #nbr_of_days = (availability_period[1]-availability_period[0]).days #Number of days of availability of the ingredient during the year
-        nbr_of_days = availability_period
+        nbr_of_days = ingredient.get_local_availability_period()
         popularity_frequency = Ingredients.get_popularity_frequency(Ingredients,ingredient)#history.popularity_frequency(ingredient) #Frequence at which the 
         return [self.ingredient_availability_score(self,nbr_of_days), self.popularity_score(self,popularity_frequency)] + [self.personal_constraint_score(self,user,ingredients,ingredient)]
     

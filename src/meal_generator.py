@@ -117,12 +117,12 @@ class Meal_generator(object):
             for j in range(len(original_complixity_factors)):
                 current_difference = generated_complixity_factors[j] - original_complixity_factors[j]
                 #print("Current difference between "+ str(generated_sequence[i]) + " and " + str(origin_sequence[i]) + " is " + str(current_difference))
-                if(fabs(current_difference)>self.detection_threshold): #Change deemed significant regarding specific aspect
+                if(current_difference>self.detection_threshold): #Change deemed significant regarding specific aspect
                     if(j==0): #Surprise over availability period of the ingredient
                         #print(""+ str(generated_sequence[i][3]) + " n'est disponible que " + Ingredients.Ingredients.get_availability_period(ingredients,generated_sequence[i][3]) + "jours cette annee, et c'est pourquoi nous vous l'avons propose")
-                        print("Difference in complexity = " +str(fabs(current_difference)))
-                        print(""+ str(generated_sequence[i]) + " n'est disponible que " + str(self.ingredients.get_availability_period(generated_sequence[i])) + " jours cette annee, par rapport à " + str(origin_sequence[i]) + "qui est diponible " + str(self.ingredients.get_availability_period(origin_sequence[i])) + " jours par an, et c'est pourquoi nous vous l'avons propose")
+                        #print("Difference in complexity = " +str(fabs(current_difference)))
+                        print(str(generated_sequence[i]) + " n'est disponible que " + str(self.ingredients.get_availability_period(generated_sequence[i])) + " jours cette annee, par rapport à " + str(origin_sequence[i]) + " qui est diponible " + str(self.ingredients.get_availability_period(origin_sequence[i])) + " jours par an, et c'est pourquoi nous vous l'avons propose")
                     if(j==1): #Surprise over overall popularity of the ingredient
-                        print("Pour vous surprendre au quotidien, nous avons souhaité vous proposer un aliment rarement present dans la diète des francais : " + str(generated_sequence[i]))
+                        print("Pour vous surprendre au quotidien, nous avons souhaité vous proposer un aliment rarement present dans la diète des francais : " + str(generated_sequence[i]) + " plutôt que " + str(origin_sequence[i]))
                 #if(current_difference<-2):
             
