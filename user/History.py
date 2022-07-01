@@ -38,9 +38,9 @@ class History() :
                     count+=1
         return count            
     
-    def quantity_by_type(self, type_index):            
+    def quantity_by_type(self, ingredients, type_index):            
         count = 0 
-        for elem in Ingredients.get_type_from_index(type_index):
+        for elem in ingredients.get_type_from_index(type_index):
             count+= self.search_ingredient(elem)
         return count
     

@@ -14,6 +14,7 @@ from food.alimentary_sequence import Alimentary_sequence
 from user.User import User
 from food.Ingredient import Ingredient
 from food.Ingredients import Ingredients
+from copy import deepcopy
 
 def initialisation():
     ''' We initialize the ingredients, as well as the user profile with a "selection" of meals for 2 weeks '''
@@ -92,19 +93,16 @@ def back_input_after_2(user, generator):
         quit()
         #Find a way to execute the general_menu file...
     elif(user_in.__eq__("2")):
-        number_of_menus = meal_arg_input()
-        
-        origin_sequence = User.get_last_user_meal(user)
+        number_of_menus = meal_arg_input() #Also considers "back" and "exit"
+        origin_sequence = user.get_last_user_meal()
         print("Generating " + str(number_of_menus) + " menu(s)...\n")
         for i in range(number_of_menus):
-            #generated_sequence = meal_generator.Meal_generator.generate_meal(meal_generator.Meal_generator, origin_sequence.get_ingredients())
+            true_origin_sequence = deepcopy(origin_sequence)
             generated_sequence = generator.generate_meal(origin_sequence.get_ingredients())
-            #meal_generator.Meal_generator.explain_meal(meal_generator.Meal_generator,origin_sequence.get_ingredients(), generated_sequence.get_ingredients())
-            generator.explain_meal(origin_sequence.get_ingredients(), generated_sequence.get_ingredients())
+            generator.explain_meal(true_origin_sequence.get_ingredients(), generated_sequence.get_ingredients())
             origin_sequence = generated_sequence
             user.store_user_meal(generated_sequence)
         print("Done ! Here you go ;)\n")
-        
         quit()
     else:
         print("Unrecognized input, please try again")
@@ -128,14 +126,13 @@ if __name__ == '__main__':
         #Find a way to execute the general_menu file...
     elif(user_in.__eq__("2")):
         number_of_menus = meal_arg_input() #Also considers "back" and "exit"
-        #origin_sequence = User.get_last_user_meal(user)
         origin_sequence = user.get_last_user_meal()
         print("Generating " + str(number_of_menus) + " menu(s)...\n")
         for i in range(number_of_menus):
-            generated_sequence = meal_generator.Meal_generator.generate_meal(generator, origin_sequence.get_ingredients())
-            meal_generator.Meal_generator.explain_meal(generator,origin_sequence.get_ingredients(), generated_sequence.get_ingredients())
+            true_origin_sequence = deepcopy(origin_sequence)
+            generated_sequence = generator.generate_meal(origin_sequence.get_ingredients())
+            generator.explain_meal(true_origin_sequence.get_ingredients(), generated_sequence.get_ingredients())
             origin_sequence = generated_sequence
-            #User.store_user_meal(user, generated_sequence)
             user.store_user_meal(generated_sequence)
         print("Done ! Here you go ;)\n")
         quit()

@@ -27,8 +27,7 @@ class Constraint(ABC) :
     
     def get_ingredients_is_soft(self):
         return self.is_soft
-    
 
     def constraint_interest(self): #returns the constraint interest
-        pass
+        return 0
     

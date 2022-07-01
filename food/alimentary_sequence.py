@@ -19,7 +19,7 @@ class Alimentary_sequence(object):
         self.set_time(time)#The time necessary to make the recipe
     
     def __str__(self, *args, **kwargs):
-        toprint = "Starter : " + self.ingredients[0] + "\nMain course : " + self.ingredients[1] + " and " + self.ingredients[2] + "\nDessert : " + self.ingredients[3]
+        toprint = "Starter : " + str(self.ingredients[0]) + "\nMain course : " + str(self.ingredients[1]) + " and " + str(self.ingredients[2]) + "\nDessert : " + str(self.ingredients[3])
         return toprint
         
     def set_ingredients(self, ingredients):
